@@ -11,9 +11,8 @@ public class MACreativeTab extends CreativeTabs {
 		super(MysticalAgriculture.MOD_ID);
 	}
 
-	@Override
-	public ItemStack getTabIconItem() {
-		return ModItems.itemCrafting.itemSupremiumEssence;
-	}
-
+    @Override
+    public ItemStack createIcon() {
+        return ModItems.itemCrafting.itemSupremiumEssence;
+    }
 }

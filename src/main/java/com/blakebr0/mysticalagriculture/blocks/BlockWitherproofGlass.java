@@ -34,7 +34,8 @@ public class BlockWitherproofGlass extends BlockGlass implements IEnableable {
 		super(Material.GLASS, false);
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 		this.setSoundType(SoundType.GLASS);
-		this.setUnlocalizedName("ma.witherproof_glass");
+        String name = "witherproof_glass";
+        this.setTranslationKey("ma." + name);
 		this.setHardness(20.0F);
 		this.setResistance(1800.0F);
 		this.setHarvestLevel("pickaxe", 1);
@@ -54,13 +55,12 @@ public class BlockWitherproofGlass extends BlockGlass implements IEnableable {
 	public boolean canDropFromExplosion(Explosion explosion){
 		return false;
 	}
-	  
-	@Nonnull
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer(){
-		return BlockRenderLayer.TRANSLUCENT;
-	}
+
+    @Override
+    @Nonnull
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.TRANSLUCENT;
+    }
 
 	@Override
 	public boolean isFullCube(IBlockState state){

@@ -32,7 +32,7 @@ public class ItemSuperiumArmor extends ItemArmor implements IRepairMaterial {
 	
 	public ItemSuperiumArmor(String name, ArmorMaterial material, int index, EntityEquipmentSlot slot){
 		super(material, index, slot);
-		this.setUnlocalizedName("ma." + name);
+        this.setTranslationKey("ma." + name);
 		this.setRegistryName(name);
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 	    this.setMaxStackSize(1);

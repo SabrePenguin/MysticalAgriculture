@@ -9,7 +9,7 @@ public class BlockSoulstoneStairs extends BlockStairs {
 
 	public BlockSoulstoneStairs(String name, IBlockState modelState){
 		super(modelState);
-		this.setUnlocalizedName("ma." + name);
+        this.setTranslationKey("ma." + name);
 		this.setRegistryName(name);
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 	}

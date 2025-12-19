@@ -29,7 +29,7 @@ public class BlockSoulstoneSlab extends BlockSlab {
 	
 	public BlockSoulstoneSlab(String name, boolean isDouble){
 		super(Material.ROCK);
-		this.setUnlocalizedName("ma." + name);
+        this.setTranslationKey("ma." + name);
 		this.setRegistryName(name);
 		if(!isDouble){
 			this.useNeighborBrightness = true;
@@ -43,8 +43,8 @@ public class BlockSoulstoneSlab extends BlockSlab {
 	}
 
 	@Override
-	public String getUnlocalizedName(int meta) {
-		return super.getUnlocalizedName();
+	public String getTranslationKey(int meta) {
+		return super.getTranslationKey();
 	}
 
 	public BlockSoulstoneSlab setDrop(Block drop){

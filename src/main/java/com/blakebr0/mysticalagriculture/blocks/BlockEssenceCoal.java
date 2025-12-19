@@ -65,7 +65,17 @@ public class BlockEssenceCoal extends BlockBase implements IModelHelper, IEnable
     
     public void initModels(){
     	for(EssenceType.Type type : EssenceType.Type.values()){
-        	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), type.getMetadata(), new ModelResourceLocation(MysticalAgriculture.MOD_ID + ":" + getUnlocalizedName().substring(8) + "_" + type.byMetadata(type.getMetadata()).getName()));
+        	ModelLoader.setCustomModelResourceLocation(
+                    Item.getItemFromBlock(this),
+                    type.getMetadata(),
+                    new ModelResourceLocation(
+                            MysticalAgriculture.MOD_ID +
+                                    ":" +
+                                    getRegistryName().getPath() +
+                                    "_" +
+                                    type.byMetadata(type.getMetadata()).getName()
+                    )
+            );
     	}
     }
 

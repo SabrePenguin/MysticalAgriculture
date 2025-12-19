@@ -45,7 +45,17 @@ public class BlockIngotStorage extends BlockBase implements IModelHelper {
     
     public void initModels(){
     	for(Type type : Type.values()){
-        	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), type.getMetadata(), new ModelResourceLocation(MysticalAgriculture.MOD_ID + ":" + getUnlocalizedName().substring(8) + "_" + type.byMetadata(type.getMetadata()).getName()));
+        	ModelLoader.setCustomModelResourceLocation(
+                    Item.getItemFromBlock(this),
+                    type.getMetadata(),
+                    new ModelResourceLocation(
+                            MysticalAgriculture.MOD_ID +
+                                    ":" +
+                                    getRegistryName().getPath() +
+                                    "_" +
+                                    type.byMetadata(type.getMetadata()).getName()
+                    )
+            );
     	}
     }
 

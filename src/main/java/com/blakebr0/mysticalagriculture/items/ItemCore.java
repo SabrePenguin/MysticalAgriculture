@@ -18,7 +18,7 @@ public class ItemCore extends Item {
 	
 	public ItemCore(String name){
 		super();
-		this.setUnlocalizedName("ma." + name);
+        this.setTranslationKey("ma." + name);
 		this.setRegistryName(name);
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 	}

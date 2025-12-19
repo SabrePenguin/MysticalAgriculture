@@ -43,7 +43,7 @@ public class BlockSeedReprocessor extends BlockContainer implements IEnableable 
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         this.setSoundType(SoundType.METAL);
         setHardness(8.0F);
-        this.setUnlocalizedName("ma.seed_reprocessor");
+        this.setTranslationKey("ma." + "seed_reprocessor");
         setRegistryName("seed_reprocessor");
         setHarvestLevel("pickaxe", 1);
         this.setResistance(12.0F);
@@ -182,7 +182,7 @@ public class BlockSeedReprocessor extends BlockContainer implements IEnableable 
     }
 
     public IBlockState getStateFromMeta(int meta){
-        EnumFacing enumfacing = EnumFacing.getFront(meta);
+        EnumFacing enumfacing = EnumFacing.byIndex(meta);
 
         if (enumfacing.getAxis() == EnumFacing.Axis.Y){
             enumfacing = EnumFacing.NORTH;

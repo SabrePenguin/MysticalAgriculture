@@ -51,8 +51,8 @@ public class CompatJEI implements IModPlugin {
         IJeiHelpers helpers = registry.getJeiHelpers();
         IRecipeTransferRegistry transfer = registry.getRecipeTransferRegistry();
         
-        blocks.forEach(block -> registry.addIngredientInfo(new ItemStack(block), ItemStack.class, "desc." + block.getUnlocalizedName()));
-        items.forEach(item -> registry.addIngredientInfo(new ItemStack(item), ItemStack.class, "desc." + item.getUnlocalizedName()));
+        blocks.forEach(block -> registry.addIngredientInfo(new ItemStack(block), ItemStack.class, "desc." + block.getTranslationKey()));
+        items.forEach(item -> registry.addIngredientInfo(new ItemStack(item), ItemStack.class, "desc." + item.getTranslationKey()));
         
         if (ModConfig.confSeedReprocessor) {
         	registry.addRecipeCatalyst(new ItemStack(ModBlocks.blockSeedReprocessor), ReprocessorCategory.UID);

@@ -35,7 +35,7 @@ public class ItemEssenceShovel extends ItemSpade implements IRepairMaterial {
 	
 	public ItemEssenceShovel(String name, ToolMaterial material, TextFormatting color){
 		super(material);
-		this.setUnlocalizedName("ma." + name);
+        this.setTranslationKey("ma." + name);
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 		this.color = color;
 	}
@@ -133,7 +133,7 @@ public class ItemEssenceShovel extends ItemSpade implements IRepairMaterial {
         IBlockState state = world.getBlockState(pos);
         float hardness = state.getBlockHardness(world, pos);
         Block block = state.getBlock();
-        boolean harvest = (ForgeHooks.canHarvestBlock(block, player, world, pos) || this.canHarvestBlock(state, stack)) && (!extra || this.getStrVsBlock(stack, world.getBlockState(pos)) > 1.0F);
+        boolean harvest = (ForgeHooks.canHarvestBlock(block, player, world, pos) || this.canHarvestBlock(state, stack)) && (!extra || this.getDestroySpeed(stack, world.getBlockState(pos)) > 1.0F);
         if(hardness >= 0.0F && (!extra || harvest)){
             return ToolTools.breakBlocksAOE(stack, world, player, pos);
         }

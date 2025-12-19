@@ -40,7 +40,7 @@ public class ItemEssenceSword extends ItemSword implements IRepairMaterial {
 	
 	public ItemEssenceSword(String name, ToolMaterial material, TextFormatting color){
 		super(material);
-		this.setUnlocalizedName("ma." + name);
+        this.setTranslationKey("ma." + name);
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 		this.color = color;
 		this.material = material;
@@ -77,8 +77,8 @@ public class ItemEssenceSword extends ItemSword implements IRepairMaterial {
 	}
 	
 	@Override
-	public float getDamageVsEntity(){
-		return this.material.getDamageVsEntity();
+	public float getAttackDamage(){
+		return this.material.getAttackDamage();
 	}
 	
 	public float getDamageVsEntity(ItemStack stack){
@@ -86,13 +86,13 @@ public class ItemEssenceSword extends ItemSword implements IRepairMaterial {
 			NBTTagCompound tag = NBTHelper.getTagCompound(stack);
 			if(tag.hasKey(ToolType.TOOL_TYPE)){
 				if(tag.getInteger(ToolType.TOOL_TYPE) == ToolType.STRENGTH.getIndex()){
-					return ((ItemEssenceSword)stack.getItem()).getDamageVsEntity() + 10.0F;
+					return ((ItemEssenceSword)stack.getItem()).getAttackDamage() + 10.0F;
 				} else if(tag.getInteger(ToolType.TOOL_TYPE) == ToolType.STRENGTH_2.getIndex()){
-					return ((ItemEssenceSword)stack.getItem()).getDamageVsEntity() + 20.0F;
+					return ((ItemEssenceSword)stack.getItem()).getAttackDamage() + 20.0F;
 				}
 			}
 		}
-		return ((ItemEssenceSword)stack.getItem()).getDamageVsEntity();
+		return ((ItemEssenceSword)stack.getItem()).getAttackDamage();
 	}
 	
     @Override
