@@ -22,7 +22,7 @@ public class ModTileEntities {
 	
 	public static void init() {
 		if (ModConfig.confSeedReprocessor) {
-			GameRegistry.registerTileEntity(TileEntitySeedReprocessor.class, "MA_Seed_Reprocessor");
+			GameRegistry.registerTileEntity(TileEntitySeedReprocessor.class, ResourceHelper.getResource(MysticalAgriculture.MOD_ID, "ma_seed_reprocessor"));
 			GameRegistry.registerTileEntity(TileInferiumReprocessor.class, ResourceHelper.getResource(MysticalAgriculture.MOD_ID, "inferium_reprocessor"));
 			GameRegistry.registerTileEntity(TilePrudentiumReprocessor.class, ResourceHelper.getResource(MysticalAgriculture.MOD_ID, "prudentium_reprocessor"));
 			GameRegistry.registerTileEntity(TileIntermediumReprocessor.class, ResourceHelper.getResource(MysticalAgriculture.MOD_ID, "intermedium_reprocessor"));
@@ -35,14 +35,14 @@ public class ModTileEntities {
 		}
 		
 		if (ModConfig.confEssenceFurnaces) {
-			GameRegistry.registerTileEntity(TileInferiumFurnace.class, "MA_Inferium_Furnace");
-			GameRegistry.registerTileEntity(TilePrudentiumFurnace.class, "MA_Prudentium_Furnace");
-			GameRegistry.registerTileEntity(TileIntermediumFurnace.class, "MA_Intermedium_Furnace");
-			GameRegistry.registerTileEntity(TileSuperiumFurnace.class, "MA_Superium_Furnace");
-			GameRegistry.registerTileEntity(TileSupremiumFurnace.class, "MA_Supremium_Furnace");
-			
+			GameRegistry.registerTileEntity(TileInferiumFurnace.class, ResourceHelper.getResource(MysticalAgriculture.MOD_ID, "ma_inferium_furnace"));
+			GameRegistry.registerTileEntity(TilePrudentiumFurnace.class, ResourceHelper.getResource(MysticalAgriculture.MOD_ID, "ma_prudentium_furnace"));
+			GameRegistry.registerTileEntity(TileIntermediumFurnace.class, ResourceHelper.getResource(MysticalAgriculture.MOD_ID, "ma_intermedium_furnace"));
+			GameRegistry.registerTileEntity(TileSuperiumFurnace.class, ResourceHelper.getResource(MysticalAgriculture.MOD_ID, "ma_superium_furnace"));
+			GameRegistry.registerTileEntity(TileSupremiumFurnace.class, ResourceHelper.getResource(MysticalAgriculture.MOD_ID, "ma_supremium_furnace"));
+
 			if (ModConfig.confUltimateFurnace) {
-				GameRegistry.registerTileEntity(TileUltimateFurnace.class, "MA_Ultimate_Furnace");
+                GameRegistry.registerTileEntity(TileUltimateFurnace.class, ResourceHelper.getResource(MysticalAgriculture.MOD_ID, "ma_ultimate_furnace"));
 			}
 		}
 	}
