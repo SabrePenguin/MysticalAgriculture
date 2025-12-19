@@ -42,5 +42,4 @@ dependencies {
     runtimeOnlyNonPublishable("mezz.jei:jei_1.12.2:4.10.0.198")
     compileOnly(rfg.deobf("curse.maven:hwyla-253449:2568751")) // HWYLA 1.8.26-B41
     api(rfg.deobf("curse.maven:cucumber-272335:2645867")) // Cucumber 1.1.3
-//    api("com.blakebr0.cucumber:Cucumber:1.1.3")
 }
