@@ -1,14 +1,15 @@
 package com.blakebr0.mysticalagriculture.compat.jei.reprocessor;
 
+import net.minecraft.item.ItemStack;
+
 import com.blakebr0.mysticalagriculture.crafting.ReprocessorRecipe;
 
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.item.ItemStack;
 
 public class ReprocessorWrapper implements IRecipeWrapper {
-	
+
     private ItemStack input;
     private ItemStack output;
 
@@ -31,8 +32,8 @@ public class ReprocessorWrapper implements IRecipeWrapper {
 
         ReprocessorWrapper other = (ReprocessorWrapper) obj;
 
-        if (!ItemStack.areItemStacksEqual(this.input, other.input)){
-        	return false;
+        if (!ItemStack.areItemStacksEqual(this.input, other.input)) {
+            return false;
         }
 
         return ItemStack.areItemStacksEqual(this.output, other.output);

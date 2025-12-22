@@ -2,6 +2,9 @@ package com.blakebr0.mysticalagriculture.compat.jei.tinkeringtable;
 
 import java.util.List;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+
 import com.blakebr0.cucumber.helper.ResourceHelper;
 import com.blakebr0.cucumber.util.Utils;
 import com.blakebr0.mysticalagriculture.MysticalAgriculture;
@@ -12,13 +15,12 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 public class TinkeringTableCategory implements IRecipeCategory<TinkeringTableWrapper> {
 
     public static final String UID = "mysticalagriculture:tinkering_table_jei";
-    private static final ResourceLocation TEXTURE = ResourceHelper.getResource(MysticalAgriculture.MOD_ID, "textures/gui/tinkering_table_gui.png");
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource(MysticalAgriculture.MOD_ID,
+            "textures/gui/tinkering_table_gui.png");
 
     private final IDrawable background;
 
@@ -56,21 +58,21 @@ public class TinkeringTableCategory implements IRecipeCategory<TinkeringTableWra
         stacks.init(7, true, 68, 47);
         stacks.init(8, true, 19, 68);
         stacks.init(9, true, 49, 68);
-        
+
         List<List<ItemStack>> inputs = ingredients.getInputs(ItemStack.class);
         List<ItemStack> outputs = ingredients.getOutputs(ItemStack.class).get(0);
-        
+
         stacks.set(0, outputs);
-        
+
         for (int i = 1; i <= 9; i++) {
-        	stacks.set(i, inputs.get(i - 1));
+            stacks.set(i, inputs.get(i - 1));
         }
 
         layout.setRecipeTransferButton(132, 72);
     }
 
-	@Override
-	public String getModName() {
-		return MysticalAgriculture.NAME;
-	}
+    @Override
+    public String getModName() {
+        return MysticalAgriculture.NAME;
+    }
 }

@@ -4,13 +4,6 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import com.blakebr0.cucumber.lib.Colors;
-import com.blakebr0.mysticalagriculture.MysticalAgriculture;
-import com.blakebr0.mysticalagriculture.blocks.crop.BlockInferiumCrop;
-import com.blakebr0.mysticalagriculture.blocks.crop.BlockMysticalCrop;
-import com.blakebr0.mysticalagriculture.config.ModConfig;
-import com.blakebr0.mysticalagriculture.lib.Tooltips;
-
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
@@ -28,60 +21,76 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.blakebr0.cucumber.lib.Colors;
+import com.blakebr0.mysticalagriculture.MysticalAgriculture;
+import com.blakebr0.mysticalagriculture.blocks.crop.BlockInferiumCrop;
+import com.blakebr0.mysticalagriculture.blocks.crop.BlockMysticalCrop;
+import com.blakebr0.mysticalagriculture.config.ModConfig;
+import com.blakebr0.mysticalagriculture.lib.Tooltips;
+
 public class ItemFertilizedEssence extends Item {
 
-	public ItemFertilizedEssence(){
-		super();
+    public ItemFertilizedEssence() {
+        super();
         String name = "fertilized_essence";
         this.setTranslationKey("ma." + name);
-		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
-		
+        this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
+
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new Bootstrap.BehaviorDispenseOptional() {
+
             protected ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
                 this.successful = true;
                 World world = source.getWorld();
-                BlockPos blockpos = source.getBlockPos().offset((EnumFacing)source.getBlockState().getValue(BlockDispenser.FACING));
+                BlockPos blockpos = source.getBlockPos()
+                        .offset((EnumFacing) source.getBlockState().getValue(BlockDispenser.FACING));
 
                 if (ItemFertilizedEssence.applyFertilizer(stack, world, blockpos)) {
-                	if (!world.isRemote) {
-                		world.playEvent(2005, blockpos, 0);
-                	}
+                    if (!world.isRemote) {
+                        world.playEvent(2005, blockpos, 0);
+                    }
                 } else {
-                	this.successful = false;
+                    this.successful = false;
                 }
 
                 return stack;
             }
         });
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced){
-		tooltip.add(Tooltips.FERTILIZED_ESSENCE);
-		int chance = ModConfig.confFertilizedEssenceChance;
-		if(ModConfig.confFertilizedEssenceChance > 0){ tooltip.add(Tooltips.DROP_CHANCE + Colors.LIGHT_PURPLE + chance + "%"); }
-	}
-	
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+        tooltip.add(Tooltips.FERTILIZED_ESSENCE);
+        int chance = ModConfig.confFertilizedEssenceChance;
+        if (ModConfig.confFertilizedEssenceChance > 0) {
+            tooltip.add(Tooltips.DROP_CHANCE + Colors.LIGHT_PURPLE + chance + "%");
+        }
+    }
+
     public static boolean applyFertilizer(ItemStack stack, World worldIn, BlockPos target) {
         if (worldIn instanceof net.minecraft.world.WorldServer)
-            return applyFertilizer(stack, worldIn, target, net.minecraftforge.common.util.FakePlayerFactory.getMinecraft((net.minecraft.world.WorldServer)worldIn), null);
+            return applyFertilizer(stack, worldIn, target, net.minecraftforge.common.util.FakePlayerFactory
+                    .getMinecraft((net.minecraft.world.WorldServer) worldIn), null);
         return false;
     }
-	
-    public static boolean applyFertilizer(ItemStack stack, World worldIn, BlockPos target, EntityPlayer player, EnumHand hand){
+
+    public static boolean applyFertilizer(ItemStack stack, World worldIn, BlockPos target, EntityPlayer player,
+                                          EnumHand hand) {
         IBlockState iblockstate = worldIn.getBlockState(target);
 
-        int hook = net.minecraftforge.event.ForgeEventFactory.onApplyBonemeal(player, worldIn, target, iblockstate, stack, hand);
-        if(hook != 0) return hook > 0;
+        int hook = net.minecraftforge.event.ForgeEventFactory.onApplyBonemeal(player, worldIn, target, iblockstate,
+                stack, hand);
+        if (hook != 0) return hook > 0;
 
-        if(iblockstate.getBlock() instanceof IGrowable){
-            IGrowable igrowable = (IGrowable)iblockstate.getBlock();
+        if (iblockstate.getBlock() instanceof IGrowable) {
+            IGrowable igrowable = (IGrowable) iblockstate.getBlock();
 
-            if(igrowable.canGrow(worldIn, target, iblockstate, worldIn.isRemote)){
-                if(!worldIn.isRemote){
-                    if(igrowable.canUseBonemeal(worldIn, worldIn.rand, target, iblockstate) || iblockstate.getBlock() instanceof BlockMysticalCrop || iblockstate.getBlock() instanceof BlockInferiumCrop){
-                    	igrowable.grow(worldIn, worldIn.rand, target, iblockstate);
+            if (igrowable.canGrow(worldIn, target, iblockstate, worldIn.isRemote)) {
+                if (!worldIn.isRemote) {
+                    if (igrowable.canUseBonemeal(worldIn, worldIn.rand, target, iblockstate) ||
+                            iblockstate.getBlock() instanceof BlockMysticalCrop ||
+                            iblockstate.getBlock() instanceof BlockInferiumCrop) {
+                        igrowable.grow(worldIn, worldIn.rand, target, iblockstate);
                     }
                     stack.shrink(1);
                 }
@@ -90,20 +99,21 @@ public class ItemFertilizedEssence extends Item {
         }
         return false;
     }
-	
+
     @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ){
+    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing,
+                                      float hitX, float hitY, float hitZ) {
         ItemStack stack = player.getHeldItem(hand);
 
-        if(!player.canPlayerEdit(pos.offset(facing), facing, stack)){
+        if (!player.canPlayerEdit(pos.offset(facing), facing, stack)) {
             return EnumActionResult.FAIL;
         } else {
-        	if (applyFertilizer(stack, world, pos, player, hand)){
-        		if (!world.isRemote){
-        			world.playEvent(2005, pos, 0);
-        		}
-        		return EnumActionResult.SUCCESS;
-        	}
+            if (applyFertilizer(stack, world, pos, player, hand)) {
+                if (!world.isRemote) {
+                    world.playEvent(2005, pos, 0);
+                }
+                return EnumActionResult.SUCCESS;
+            }
         }
         return EnumActionResult.PASS;
     }

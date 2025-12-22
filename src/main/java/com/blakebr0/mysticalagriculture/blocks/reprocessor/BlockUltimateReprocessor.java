@@ -1,38 +1,38 @@
 package com.blakebr0.mysticalagriculture.blocks.reprocessor;
 
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+
 import com.blakebr0.cucumber.lib.Colors;
 import com.blakebr0.mysticalagriculture.config.ModConfig;
 import com.blakebr0.mysticalagriculture.tileentity.reprocessor.TileEssenceReprocessor;
 import com.blakebr0.mysticalagriculture.tileentity.reprocessor.TileUltimateReprocessor;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-
 public class BlockUltimateReprocessor extends BlockEssenceReprocessor {
-	
-	private TileUltimateReprocessor tileForInfo = new TileUltimateReprocessor();
 
-	public BlockUltimateReprocessor() {
-		super("ultimate_reprocessor");
-	}
+    private TileUltimateReprocessor tileForInfo = new TileUltimateReprocessor();
 
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileUltimateReprocessor();
-	}
+    public BlockUltimateReprocessor() {
+        super("ultimate_reprocessor");
+    }
 
-	@Override
-	public String getTooltipColor() {
-		return Colors.DARK_GRAY;
-	}
-	
-	@Override
-	public TileEssenceReprocessor getTileForInfo() {
-		return this.tileForInfo;
-	}
+    @Override
+    public TileEntity createNewTileEntity(World world, int meta) {
+        return new TileUltimateReprocessor();
+    }
 
-	@Override
-	public boolean isEnabled() {
-		return super.isEnabled() && ModConfig.confUltimateReprocessor;
-	}
+    @Override
+    public String getTooltipColor() {
+        return Colors.DARK_GRAY;
+    }
+
+    @Override
+    public TileEssenceReprocessor getTileForInfo() {
+        return this.tileForInfo;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return super.isEnabled() && ModConfig.confUltimateReprocessor;
+    }
 }

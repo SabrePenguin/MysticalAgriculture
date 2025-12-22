@@ -2,11 +2,6 @@ package com.blakebr0.mysticalagriculture.blocks.furnace;
 
 import java.util.Random;
 
-import com.blakebr0.cucumber.iface.IEnableable;
-import com.blakebr0.mysticalagriculture.MysticalAgriculture;
-import com.blakebr0.mysticalagriculture.config.ModConfig;
-import com.blakebr0.mysticalagriculture.tileentity.furnace.TileEssenceFurnace;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -34,8 +29,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.blakebr0.cucumber.iface.IEnableable;
+import com.blakebr0.mysticalagriculture.MysticalAgriculture;
+import com.blakebr0.mysticalagriculture.config.ModConfig;
+import com.blakebr0.mysticalagriculture.tileentity.furnace.TileEssenceFurnace;
+
 public class BlockEssenceFurnace extends BlockContainer implements IEnableable {
-	
+
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     protected final boolean isBurning;
     protected static boolean keepInventory;
@@ -46,8 +46,8 @@ public class BlockEssenceFurnace extends BlockContainer implements IEnableable {
         this.isBurning = isBurning;
         this.setTranslationKey("ma." + name);
         this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
-		this.setHardness(5.0F);
-		this.setResistance(10.0F);
+        this.setHardness(5.0F);
+        this.setResistance(10.0F);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class BlockEssenceFurnace extends BlockContainer implements IEnableable {
                 facing = EnumFacing.SOUTH;
             } else if (facing == EnumFacing.SOUTH && state2.isFullBlock() && !state1.isFullBlock()) {
                 facing = EnumFacing.NORTH;
-            }  else if (facing == EnumFacing.WEST && state3.isFullBlock() && !state4.isFullBlock()) {
+            } else if (facing == EnumFacing.WEST && state3.isFullBlock() && !state4.isFullBlock()) {
                 facing = EnumFacing.EAST;
             } else if (facing == EnumFacing.EAST && state4.isFullBlock() && !state3.isFullBlock()) {
                 facing = EnumFacing.WEST;
@@ -85,44 +85,50 @@ public class BlockEssenceFurnace extends BlockContainer implements IEnableable {
             double d4 = rand.nextDouble() * 0.6D - 0.3D;
 
             if (rand.nextDouble() < 0.1D) {
-                world.playSound((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+                world.playSound((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D,
+                        SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
             }
 
             switch (enumfacing) {
-            case WEST:
-            	world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 - 0.52D, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
-            	world.spawnParticle(EnumParticleTypes.FLAME, d0 - 0.52D, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
-            	break;
-            case EAST:
-            	world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + 0.52D, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
-            	world.spawnParticle(EnumParticleTypes.FLAME, d0 + 0.52D, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
-            	break;
-            case NORTH:
-            	world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 - 0.52D, 0.0D, 0.0D, 0.0D, new int[0]);
-            	world.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 - 0.52D, 0.0D, 0.0D, 0.0D, new int[0]);
-            	break;
-            case SOUTH:
-            	world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 + 0.52D, 0.0D, 0.0D, 0.0D, new int[0]);
-            	world.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 + 0.52D, 0.0D, 0.0D, 0.0D, new int[0]);
-            	break;
-            default:
-            	break;
+                case WEST:
+                    world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 - 0.52D, d1, d2 + d4, 0.0D, 0.0D, 0.0D,
+                            new int[0]);
+                    world.spawnParticle(EnumParticleTypes.FLAME, d0 - 0.52D, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
+                    break;
+                case EAST:
+                    world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + 0.52D, d1, d2 + d4, 0.0D, 0.0D, 0.0D,
+                            new int[0]);
+                    world.spawnParticle(EnumParticleTypes.FLAME, d0 + 0.52D, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
+                    break;
+                case NORTH:
+                    world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 - 0.52D, 0.0D, 0.0D, 0.0D,
+                            new int[0]);
+                    world.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 - 0.52D, 0.0D, 0.0D, 0.0D, new int[0]);
+                    break;
+                case SOUTH:
+                    world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 + 0.52D, 0.0D, 0.0D, 0.0D,
+                            new int[0]);
+                    world.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 + 0.52D, 0.0D, 0.0D, 0.0D, new int[0]);
+                    break;
+                default:
+                    break;
             }
         }
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float side, float hitX, float hitY) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
+                                    EnumFacing facing, float side, float hitX, float hitY) {
         if (world.isRemote) {
             return true;
         } else {
             TileEntity tile = world.getTileEntity(pos);
-            
+
             if (tile instanceof TileEssenceFurnace) {
                 player.displayGUIChest((TileEssenceFurnace) tile);
                 player.addStat(StatList.FURNACE_INTERACTION);
             }
-            
+
             return true;
         }
     }
@@ -133,12 +139,14 @@ public class BlockEssenceFurnace extends BlockContainer implements IEnableable {
     }
 
     @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
+                                            float hitZ, int meta, EntityLivingBase placer) {
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 
     @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer,
+                                ItemStack stack) {
         world.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
 
         if (stack.hasDisplayName()) {
@@ -163,18 +171,18 @@ public class BlockEssenceFurnace extends BlockContainer implements IEnableable {
 
         super.breakBlock(world, pos, state);
     }
-    
+
     @Override
     public boolean rotateBlock(World world, BlockPos pos, EnumFacing axis) {
-    	TileEntity tile = world.getTileEntity(pos);
-    	boolean rotate = super.rotateBlock(world, pos, axis);
-    	
-    	if (tile != null && rotate) {
-    		tile.validate();
-    		world.setTileEntity(pos, tile);
-    	}
-    	
-    	return rotate;
+        TileEntity tile = world.getTileEntity(pos);
+        boolean rotate = super.rotateBlock(world, pos, axis);
+
+        if (tile != null && rotate) {
+            tile.validate();
+            world.setTileEntity(pos, tile);
+        }
+
+        return rotate;
     }
 
     @Override
@@ -223,8 +231,8 @@ public class BlockEssenceFurnace extends BlockContainer implements IEnableable {
         return new BlockStateContainer(this, new IProperty[] { FACING });
     }
 
-	@Override
-	public boolean isEnabled() {
-		return ModConfig.confEssenceFurnaces;
-	}
+    @Override
+    public boolean isEnabled() {
+        return ModConfig.confEssenceFurnaces;
+    }
 }

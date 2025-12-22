@@ -1,27 +1,27 @@
 package com.blakebr0.mysticalagriculture.tileentity;
 
-import com.blakebr0.mysticalagriculture.handler.TinkeringTableStackHandler;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
+import com.blakebr0.mysticalagriculture.handler.TinkeringTableStackHandler;
+
 public class TileEntityTinkeringTable extends TileEntity implements ICapabilityProvider {
-	
+
     public TinkeringTableStackHandler matrix = new TinkeringTableStackHandler(9, this);
     private ItemStack result = ItemStack.EMPTY;
 
-    public ItemStack getResult(){
+    public ItemStack getResult() {
         return result;
     }
 
-    public void setResult(ItemStack result){
+    public void setResult(ItemStack result) {
         this.result = result;
     }
 
-    public void setInventorySlotContents(int slot, ItemStack stack){
+    public void setInventorySlotContents(int slot, ItemStack stack) {
         matrix.setStackInSlot(slot, stack);
     }
 
@@ -38,6 +38,7 @@ public class TileEntityTinkeringTable extends TileEntity implements ICapabilityP
     }
 
     public boolean isUseableByPlayer(EntityPlayer player) {
-        return this.getWorld().getTileEntity(this.getPos()) == this && player.getDistanceSq(this.pos.add(0.5, 0.5, 0.5)) <= 64;
+        return this.getWorld().getTileEntity(this.getPos()) == this &&
+                player.getDistanceSq(this.pos.add(0.5, 0.5, 0.5)) <= 64;
     }
 }

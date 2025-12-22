@@ -39,7 +39,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 public class TileEssenceFurnace extends TileEntityLockable implements ITickable, ISidedInventory {
-	
+
     protected static final int[] SLOTS_TOP = new int[] { 0 };
     protected static final int[] SLOTS_BOTTOM = new int[] { 2, 1 };
     protected static final int[] SLOTS_SIDES = new int[] { 1 };
@@ -78,7 +78,8 @@ public class TileEssenceFurnace extends TileEntityLockable implements ITickable,
     @Override
     public void setInventorySlotContents(int index, ItemStack stack) {
         ItemStack itemstack = this.furnaceItemStacks.get(index);
-        boolean flag = !stack.isEmpty() && stack.isItemEqual(itemstack) && ItemStack.areItemStackTagsEqual(stack, itemstack);
+        boolean flag = !stack.isEmpty() && stack.isItemEqual(itemstack) &&
+                ItemStack.areItemStackTagsEqual(stack, itemstack);
         this.furnaceItemStacks.set(index, stack);
 
         if (stack.getCount() > this.getInventoryStackLimit()) {
@@ -107,7 +108,8 @@ public class TileEssenceFurnace extends TileEntityLockable implements ITickable,
     }
 
     public static void registerFixesFurnace(DataFixer fixer) {
-        fixer.registerWalker(FixTypes.BLOCK_ENTITY, new ItemStackDataLists(TileEssenceFurnace.class, new String[] { "Items" }));
+        fixer.registerWalker(FixTypes.BLOCK_ENTITY,
+                new ItemStackDataLists(TileEssenceFurnace.class, new String[] { "Items" }));
     }
 
     @Override
@@ -128,15 +130,15 @@ public class TileEssenceFurnace extends TileEntityLockable implements ITickable,
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
-        compound.setInteger("BurnTime", (short)this.furnaceBurnTime);
-        compound.setInteger("CookTime", (short)this.cookTime);
-        compound.setInteger("CookTimeTotal", (short)this.totalCookTime);
+        compound.setInteger("BurnTime", (short) this.furnaceBurnTime);
+        compound.setInteger("CookTime", (short) this.cookTime);
+        compound.setInteger("CookTimeTotal", (short) this.totalCookTime);
         ItemStackHelper.saveAllItems(compound, this.furnaceItemStacks);
 
         if (this.hasCustomName()) {
             compound.setString("CustomName", this.furnaceCustomName);
         }
-        
+
         return compound;
     }
 
@@ -212,14 +214,12 @@ public class TileEssenceFurnace extends TileEntityLockable implements ITickable,
             this.markDirty();
         }
     }
-    
+
     public int getCookTime() {
-    	return 200;
+        return 200;
     }
-    
-    protected void setState(boolean active, World world, BlockPos pos) {
-    	
-	}
+
+    protected void setState(boolean active, World world, BlockPos pos) {}
 
     private boolean canSmelt() {
         if (this.furnaceItemStacks.get(0).isEmpty()) {
@@ -251,10 +251,12 @@ public class TileEssenceFurnace extends TileEntityLockable implements ITickable,
                 itemstack2.grow(itemstack1.getCount());
             }
 
-            if (itemstack.getItem() == Item.getItemFromBlock(Blocks.SPONGE) && itemstack.getMetadata() == 1 && !this.furnaceItemStacks.get(1).isEmpty() && ((ItemStack)this.furnaceItemStacks.get(1)).getItem() == Items.BUCKET) {
+            if (itemstack.getItem() == Item.getItemFromBlock(Blocks.SPONGE) && itemstack.getMetadata() == 1 &&
+                    !this.furnaceItemStacks.get(1).isEmpty() &&
+                    ((ItemStack) this.furnaceItemStacks.get(1)).getItem() == Items.BUCKET) {
                 this.furnaceItemStacks.set(1, new ItemStack(Items.WATER_BUCKET));
             }
-            
+
             itemstack.shrink(1);
         }
     }
@@ -265,7 +267,7 @@ public class TileEssenceFurnace extends TileEntityLockable implements ITickable,
         } else {
             Item item = stack.getItem();
 
-            if (item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.AIR){
+            if (item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.AIR) {
                 Block block = Block.getBlockFromItem(item);
 
                 if (block == Blocks.WOODEN_SLAB) return 150;
@@ -291,18 +293,16 @@ public class TileEssenceFurnace extends TileEntityLockable implements ITickable,
 
     @Override
     public boolean isUsableByPlayer(EntityPlayer player) {
-        return this.world.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
+        return this.world.getTileEntity(this.pos) != this ? false :
+                player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D,
+                        (double) this.pos.getZ() + 0.5D) <= 64.0D;
     }
 
     @Override
-    public void openInventory(EntityPlayer player) {
-    	
-    }
+    public void openInventory(EntityPlayer player) {}
 
     @Override
-    public void closeInventory(EntityPlayer player) {
-    	
-    }
+    public void closeInventory(EntityPlayer player) {}
 
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
@@ -335,7 +335,7 @@ public class TileEssenceFurnace extends TileEntityLockable implements ITickable,
                 return false;
             }
         }
-        
+
         return true;
     }
 
@@ -351,34 +351,34 @@ public class TileEssenceFurnace extends TileEntityLockable implements ITickable,
 
     @Override
     public int getField(int id) {
-        switch(id) {
-        case 0:
-        	return this.furnaceBurnTime;
-        case 1:
-        	return this.currentItemBurnTime;
-        case 2:
-        	return this.cookTime;
-        case 3:
-        	return this.totalCookTime;
-        default:
-        	return 0;
+        switch (id) {
+            case 0:
+                return this.furnaceBurnTime;
+            case 1:
+                return this.currentItemBurnTime;
+            case 2:
+                return this.cookTime;
+            case 3:
+                return this.totalCookTime;
+            default:
+                return 0;
         }
     }
 
     @Override
     public void setField(int id, int value) {
-        switch(id) {
-        case 0:
-        	this.furnaceBurnTime = value;
-        	break;
-        case 1:
-        	this.currentItemBurnTime = value;
-        	break;
-        case 2:
-        	this.cookTime = value;
-        	break;
-        case 3:
-        	this.totalCookTime = value;
+        switch (id) {
+            case 0:
+                this.furnaceBurnTime = value;
+                break;
+            case 1:
+                this.currentItemBurnTime = value;
+                break;
+            case 2:
+                this.cookTime = value;
+                break;
+            case 3:
+                this.totalCookTime = value;
         }
     }
 
@@ -399,15 +399,15 @@ public class TileEssenceFurnace extends TileEntityLockable implements ITickable,
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
         if (facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            if (facing == EnumFacing.DOWN) {            	
-            	return (T) handlerBottom;
-            } else if (facing == EnumFacing.UP) {            	
-            	return (T) handlerTop;
-            } else {            	
-            	return (T) handlerSide;
+            if (facing == EnumFacing.DOWN) {
+                return (T) handlerBottom;
+            } else if (facing == EnumFacing.UP) {
+                return (T) handlerTop;
+            } else {
+                return (T) handlerSide;
             }
         }
-        
+
         return super.getCapability(capability, facing);
     }
 }

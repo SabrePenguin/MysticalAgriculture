@@ -1,8 +1,5 @@
 package com.blakebr0.mysticalagriculture.blocks;
 
-import com.blakebr0.cucumber.iface.IModelHelper;
-import com.blakebr0.mysticalagriculture.MysticalAgriculture;
-
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -17,35 +14,36 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.client.model.ModelLoader;
 
+import com.blakebr0.cucumber.iface.IModelHelper;
+import com.blakebr0.mysticalagriculture.MysticalAgriculture;
+
 public class BlockStorage extends BlockBase implements IModelHelper {
 
     public static final PropertyEnum<Type> VARIANT = PropertyEnum.<Type>create("variant", Type.class);
-	
-	public BlockStorage(){
-		super("storage", Material.ROCK, SoundType.STONE, 4.0F, 6.0F);
+
+    public BlockStorage() {
+        super("storage", Material.ROCK, SoundType.STONE, 4.0F, 6.0F);
         this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, Type.INFERIUM));
-	}
-
-    @Override
-    public void init(){
-
     }
 
     @Override
-    public int damageDropped(IBlockState state){
-        return ((Type)state.getValue(VARIANT)).getMetadata();
+    public void init() {}
+
+    @Override
+    public int damageDropped(IBlockState state) {
+        return ((Type) state.getValue(VARIANT)).getMetadata();
     }
 
     @Override
-    public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> stacks){
-        for(Type type : Type.values()){
+    public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> stacks) {
+        for (Type type : Type.values()) {
             stacks.add(new ItemStack(this, 1, type.getMetadata()));
         }
     }
-    
-    public void initModels(){
-    	for(Type type : Type.values()){
-        	ModelLoader.setCustomModelResourceLocation(
+
+    public void initModels() {
+        for (Type type : Type.values()) {
+            ModelLoader.setCustomModelResourceLocation(
                     Item.getItemFromBlock(this),
                     type.getMetadata(),
                     new ModelResourceLocation(
@@ -53,65 +51,63 @@ public class BlockStorage extends BlockBase implements IModelHelper {
                                     ":" +
                                     getRegistryName().getPath() +
                                     "_" +
-                                    type.byMetadata(type.getMetadata()).getName()
-                    )
-            );
-    	}
+                                    type.byMetadata(type.getMetadata()).getName()));
+        }
     }
 
     @Override
-    public IBlockState getStateFromMeta(int meta){
+    public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(VARIANT, Type.byMetadata(meta));
     }
 
     @Override
-    public int getMetaFromState(IBlockState state){
-        return ((Type)state.getValue(VARIANT)).getMetadata();
+    public int getMetaFromState(IBlockState state) {
+        return ((Type) state.getValue(VARIANT)).getMetadata();
     }
 
     @Override
-    protected BlockStateContainer createBlockState(){
+    protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, new IProperty[] { VARIANT });
     }
-    
-	public static enum Type implements IStringSerializable {	
-		
-		INFERIUM(0, "inferium"),
-		PRUDENTIUM(1, "prudentium"),
-		INTERMEDIUM(2, "intermedium"),
-		SUPERIUM(3, "superium"),
-		SUPREMIUM(4, "supremium"),
-		PROSPERITY(5, "prosperity");
-		
-        private static final Type[] META_LOOKUP = new Type[values().length];
-		private final int meta;
-		private final String name;
-		
-		Type(int meta, String name){
-			this.meta = meta;
-			this.name = name;
-		}
-		
-		public int getMetadata(){
-			return this.meta;
-		}
 
-		@Override
-		public String getName(){
-			return this.name;
-		}
-		
-        public static Type byMetadata(int meta){
-            if(meta < 0 || meta >= META_LOOKUP.length){
+    public static enum Type implements IStringSerializable {
+
+        INFERIUM(0, "inferium"),
+        PRUDENTIUM(1, "prudentium"),
+        INTERMEDIUM(2, "intermedium"),
+        SUPERIUM(3, "superium"),
+        SUPREMIUM(4, "supremium"),
+        PROSPERITY(5, "prosperity");
+
+        private static final Type[] META_LOOKUP = new Type[values().length];
+        private final int meta;
+        private final String name;
+
+        Type(int meta, String name) {
+            this.meta = meta;
+            this.name = name;
+        }
+
+        public int getMetadata() {
+            return this.meta;
+        }
+
+        @Override
+        public String getName() {
+            return this.name;
+        }
+
+        public static Type byMetadata(int meta) {
+            if (meta < 0 || meta >= META_LOOKUP.length) {
                 meta = 0;
             }
             return META_LOOKUP[meta];
         }
 
         static {
-            for(Type type : values()){
+            for (Type type : values()) {
                 META_LOOKUP[type.getMetadata()] = type;
             }
         }
-	}
+    }
 }

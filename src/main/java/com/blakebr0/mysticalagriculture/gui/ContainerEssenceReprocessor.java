@@ -1,9 +1,5 @@
 package com.blakebr0.mysticalagriculture.gui;
 
-import com.blakebr0.cucumber.inventory.slot.SlotOutput;
-import com.blakebr0.mysticalagriculture.crafting.ReprocessorManager;
-import com.blakebr0.mysticalagriculture.tileentity.reprocessor.TileEssenceReprocessor;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -12,17 +8,21 @@ import net.minecraft.inventory.SlotFurnaceFuel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
 
+import com.blakebr0.cucumber.inventory.slot.SlotOutput;
+import com.blakebr0.mysticalagriculture.crafting.ReprocessorManager;
+import com.blakebr0.mysticalagriculture.tileentity.reprocessor.TileEssenceReprocessor;
+
 public class ContainerEssenceReprocessor extends Container {
-	
+
     public TileEssenceReprocessor machine;
 
     public ContainerEssenceReprocessor(InventoryPlayer player, TileEssenceReprocessor machine) {
         this.machine = machine;
-        
+
         this.addSlotToContainer(new Slot(machine, 0, 74, 42));
         this.addSlotToContainer(new SlotFurnaceFuel(machine, 1, 36, 50));
         this.addSlotToContainer(new SlotOutput(machine, 2, 134, 42));
-        
+
         int i;
 
         for (i = 0; i < 3; i++) {
