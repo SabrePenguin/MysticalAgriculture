@@ -12,7 +12,7 @@ public class BlockSoulstoneWall extends BlockWall {
 
 	public BlockSoulstoneWall(String name, Block modelBlock) {
 		super(modelBlock);
-		this.setUnlocalizedName("ma." + name);
+        this.setTranslationKey("ma." + name);
 		this.setRegistryName(name);
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 	}

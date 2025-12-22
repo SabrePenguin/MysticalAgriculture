@@ -21,7 +21,8 @@ import net.minecraft.world.World;
 public class ItemIntermediumArrow extends ItemArrow {
 	
 	public ItemIntermediumArrow(){
-		this.setUnlocalizedName("ma.intermedium_arrow");
+        String name = "intermedium_arrow";
+        this.setTranslationKey("ma." + name);
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 	}
 	

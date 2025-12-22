@@ -44,10 +44,10 @@ public class ItemEssenceBow extends ItemBow implements IRepairMaterial, ICustomB
 	public TextFormatting color;
 	
 	public ItemEssenceBow(String name, ToolMaterial material, float drawSpeed, TextFormatting color){
-		this.setUnlocalizedName("ma." + name);
+        this.setTranslationKey("ma." + name);
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 		this.toolMaterial = material;
-		this.damage = material.getDamageVsEntity() / 4;
+		this.damage = material.getAttackDamage() / 4;
 		this.drawSpeed = drawSpeed;
 		this.color = color;
 		this.setMaxStackSize(1);
@@ -158,7 +158,7 @@ public class ItemEssenceBow extends ItemBow implements IRepairMaterial, ICustomB
                         if(!world.isRemote){
                             ItemArrow itemarrow = (ItemArrow)((ItemArrow)(itemstack.getItem() instanceof ItemArrow ? itemstack.getItem() : Items.ARROW));
                             EntityArrow entityarrow = itemarrow.createArrow(world, itemstack, entityplayer);
-                            entityarrow.setAim(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f * 3.0F, 1.0F);
+                            entityarrow.shoot(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f * 3.0F, 1.0F);
                             entityarrow.setDamage(entityarrow.getDamage() + this.damage);
 
                             if(f >= 1.0F){

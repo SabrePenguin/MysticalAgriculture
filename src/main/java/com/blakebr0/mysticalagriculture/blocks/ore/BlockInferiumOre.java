@@ -87,13 +87,12 @@ public class BlockInferiumOre extends BlockBase {
         }
         return 0;
     }
-    
-	@Nonnull
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer(){
-		return BlockRenderLayer.CUTOUT_MIPPED;
-	}
+
+    @Nonnull
+    @Override
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT_MIPPED;
+    }
 
     @Override
     public ItemStack getItem(World world, BlockPos pos, IBlockState state){

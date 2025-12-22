@@ -63,8 +63,12 @@ public class ItemEssenceSickle extends ItemBase implements IRepairMaterial {
 	}
 	
 	@Override
-    public float getStrVsBlock(ItemStack stack, IBlockState state){
-        return (state.getMaterial() == Material.LEAVES || state.getMaterial() == Material.PLANTS || state.getMaterial() == Material.VINE) ? (this.toolMaterial.getEfficiencyOnProperMaterial() / 2) : super.getStrVsBlock(stack, state);
+    public float getDestroySpeed(ItemStack stack, IBlockState state){
+        return (state.getMaterial() == Material.LEAVES ||
+                state.getMaterial() == Material.PLANTS ||
+                state.getMaterial() == Material.VINE) ?
+                    (this.toolMaterial.getEfficiency() / 2) :
+                    super.getDestroySpeed(stack, state);
 	}
 
 	@Override
@@ -150,7 +154,7 @@ public class ItemEssenceSickle extends ItemBase implements IRepairMaterial {
         IBlockState state = world.getBlockState(pos);
         float hardness = state.getBlockHardness(world, pos);
         Block block = state.getBlock();
-        boolean harvest = (ForgeHooks.canHarvestBlock(block, player, world, pos) || this.canHarvestBlock(state, stack)) && (!extra || this.getStrVsBlock(stack, world.getBlockState(pos)) > 1.0F);
+        boolean harvest = (ForgeHooks.canHarvestBlock(block, player, world, pos) || this.canHarvestBlock(state, stack)) && (!extra || this.getDestroySpeed(stack, world.getBlockState(pos)) > 1.0F);
         if(hardness >= 0.0F && (!extra || harvest)){
         	return ToolTools.breakBlocksAOE(stack, world, player, pos);
         }
@@ -162,7 +166,15 @@ public class ItemEssenceSickle extends ItemBase implements IRepairMaterial {
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
 
         if(equipmentSlot == EntityEquipmentSlot.MAINHAND){
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)this.toolMaterial.getDamageVsEntity(), 0));
+            multimap.put(
+                    SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
+                    new AttributeModifier(
+                            ATTACK_DAMAGE_MODIFIER,
+                            "Weapon modifier",
+                            (double)this.toolMaterial.getAttackDamage(),
+                            0
+                    )
+            );
             multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.5D, 0));
         }
 

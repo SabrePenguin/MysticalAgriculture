@@ -21,7 +21,8 @@ import net.minecraft.world.World;
 public class ItemInferiumArrow extends ItemArrow {
 	
 	public ItemInferiumArrow(){
-		this.setUnlocalizedName("ma.inferium_arrow");
+        String name = "inferium_arrow";
+        this.setTranslationKey("ma." + name);
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 	}
 	

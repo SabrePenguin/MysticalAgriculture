@@ -21,7 +21,8 @@ import net.minecraft.world.World;
 public class ItemSuperiumArrow extends ItemArrow {
 	
 	public ItemSuperiumArrow(){
-		this.setUnlocalizedName("ma.superium_arrow");
+        String name = "superium_arrow";
+        this.setTranslationKey("ma." + name);
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 	}
 	

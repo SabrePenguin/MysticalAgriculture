@@ -32,7 +32,8 @@ public class ItemFertilizedEssence extends Item {
 
 	public ItemFertilizedEssence(){
 		super();
-		this.setUnlocalizedName("ma.fertilized_essence");
+        String name = "fertilized_essence";
+        this.setTranslationKey("ma." + name);
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 		
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new Bootstrap.BehaviorDispenseOptional() {

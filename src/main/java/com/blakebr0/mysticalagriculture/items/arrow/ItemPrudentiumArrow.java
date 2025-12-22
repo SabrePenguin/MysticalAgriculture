@@ -21,7 +21,8 @@ import net.minecraft.world.World;
 public class ItemPrudentiumArrow extends ItemArrow {
 	
 	public ItemPrudentiumArrow(){
-		this.setUnlocalizedName("ma.prudentium_arrow");
+        String name = "prudentium_arrow";
+        this.setTranslationKey("ma." + name);
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 	}
 	

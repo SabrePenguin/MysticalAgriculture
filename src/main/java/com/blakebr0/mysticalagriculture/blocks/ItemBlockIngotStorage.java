@@ -13,8 +13,8 @@ public class ItemBlockIngotStorage extends ItemBlock {
 	}
 	
 	@Override
-	public String getUnlocalizedName(ItemStack stack){
-		return super.getUnlocalizedName() + "_" + BlockIngotStorage.Type.byMetadata(stack.getMetadata()).getName();
+	public String getTranslationKey(ItemStack stack){
+		return super.getTranslationKey() + "_" + BlockIngotStorage.Type.byMetadata(stack.getMetadata()).getName();
 	}
 	
 	@Override

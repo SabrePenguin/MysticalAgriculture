@@ -51,13 +51,12 @@ public class BlockMachineFrame extends BlockBase {
 		return super.onBlockActivated(world, pos, state, player, hand, heldItem, side, hitX, hitY)
 ;
 	}
-	
-	@Nonnull
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer(){
-		return BlockRenderLayer.CUTOUT;
-	}
+
+    @Nonnull
+    @Override
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
 
 	@Override
 	public boolean isFullCube(IBlockState state){

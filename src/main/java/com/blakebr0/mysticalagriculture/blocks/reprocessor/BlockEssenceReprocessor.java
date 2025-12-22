@@ -45,7 +45,7 @@ public abstract class BlockEssenceReprocessor extends BlockContainer implements 
 	public BlockEssenceReprocessor(String name) {
 		super(Material.IRON);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-		this.setUnlocalizedName("ma." + name);
+        this.setTranslationKey("ma." + name);
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 		this.setSoundType(SoundType.METAL);
 		this.setHardness(8.0F);
@@ -186,7 +186,7 @@ public abstract class BlockEssenceReprocessor extends BlockContainer implements 
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		EnumFacing facing = EnumFacing.getFront(meta);
+        EnumFacing facing = EnumFacing.byIndex(meta);
 
 		if (facing.getAxis() == EnumFacing.Axis.Y) {
 			facing = EnumFacing.NORTH;

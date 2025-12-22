@@ -12,7 +12,7 @@ public class BlockBase extends Block {
 		super(material);
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 		this.setSoundType(sound);
-		this.setUnlocalizedName("ma." + name);
+        this.setTranslationKey("ma." + name);
 		this.setHardness(hardness);
 		this.setResistance(resistance);
 		this.setHarvestLevel(tool, level);
@@ -22,7 +22,7 @@ public class BlockBase extends Block {
 		super(material);
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 		this.setSoundType(sound);
-		this.setUnlocalizedName("ma." + name);
+        this.setTranslationKey("ma." + name);
 		this.setHardness(hardness);
 		this.setResistance(resistance);
 	}

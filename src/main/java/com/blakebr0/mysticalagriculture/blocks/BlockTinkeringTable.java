@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.blakebr0.cucumber.helper.ResourceHelper;
 import com.blakebr0.cucumber.iface.IModelHelper;
 import com.blakebr0.mysticalagriculture.MysticalAgriculture;
 import com.blakebr0.mysticalagriculture.lib.EssenceType;
@@ -44,7 +45,7 @@ public class BlockTinkeringTable extends BlockBase implements ITileEntityProvide
 	public BlockTinkeringTable(){
 		super("tinkering_table",Material.IRON, SoundType.METAL, 8.0F, 12.0F);
         this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EssenceType.Type.INFERIUM));
-		GameRegistry.registerTileEntity(TileEntityTinkeringTable.class, "ma.tinkering_table");
+		GameRegistry.registerTileEntity(TileEntityTinkeringTable.class, ResourceHelper.getResource(MysticalAgriculture.MOD_ID, "tinkering_table"));
 	}
 
     @Override
@@ -79,13 +80,12 @@ public class BlockTinkeringTable extends BlockBase implements ITileEntityProvide
         }
         super.breakBlock(world, pos, state);
     }
-	
-	@Nonnull
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer(){
-		return BlockRenderLayer.CUTOUT;
-	}
+
+    @Override
+    @Nonnull
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
 
 	@Override
 	public boolean isFullCube(IBlockState state){
@@ -111,7 +111,17 @@ public class BlockTinkeringTable extends BlockBase implements ITileEntityProvide
     
     public void initModels(){
     	for(EssenceType.Type type : EssenceType.Type.values()){
-        	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), type.getMetadata(), new ModelResourceLocation(MysticalAgriculture.MOD_ID + ":" + getUnlocalizedName().substring(8) + "_" + type.byMetadata(type.getMetadata()).getName()));
+        	ModelLoader.setCustomModelResourceLocation(
+                    Item.getItemFromBlock(this),
+                    type.getMetadata(),
+                    new ModelResourceLocation(
+                            MysticalAgriculture.MOD_ID +
+                                    ":" +
+                                    getRegistryName().getPath() +
+                                    "_" +
+                                    type.byMetadata(type.getMetadata()).getName()
+                    )
+            );
     	}
     }
 

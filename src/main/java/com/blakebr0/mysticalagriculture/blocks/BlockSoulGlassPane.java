@@ -15,17 +15,16 @@ public class BlockSoulGlassPane extends BlockPane {
 
 	public BlockSoulGlassPane(){
 		super(Material.GLASS, false);
-		this.setUnlocalizedName("ma.soul_glass_pane");
+        String name = "soul_glass_pane";
+        this.setTranslationKey("ma." + name);
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 		this.setHardness(0.3F);
 		this.setSoundType(SoundType.GLASS);
 	}
-	
-	@Nonnull
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer(){
-		return BlockRenderLayer.TRANSLUCENT;
-	}
 
+    @Override
+    @Nonnull
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.TRANSLUCENT;
+    }
 }

@@ -11,7 +11,7 @@ import net.minecraft.block.BlockTorch;
 public class BlockMinersTorch extends BlockTorch implements IEnableable {
 
 	public BlockMinersTorch(){
-		this.setUnlocalizedName("ma.miners_torch");
+        this.setTranslationKey("ma." + "miners_torch");
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 		this.setLightLevel(1.0F);
 	}

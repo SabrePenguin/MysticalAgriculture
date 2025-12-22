@@ -15,8 +15,8 @@ public class ItemBlockEssenceCoal extends ItemBlock {
 	}
 	
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
-		return super.getUnlocalizedName() + "_" + EssenceType.Type.byMetadata(stack.getMetadata()).getName();
+	public String getTranslationKey(ItemStack stack) {
+		return super.getTranslationKey() + "_" + EssenceType.Type.byMetadata(stack.getMetadata()).getName();
 	}
 	
 	@Override

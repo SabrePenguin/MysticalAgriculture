@@ -44,7 +44,7 @@ public class BlockEssenceFurnace extends BlockContainer implements IEnableable {
         super(Material.ROCK);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         this.isBurning = isBurning;
-		this.setUnlocalizedName("ma." + name);
+        this.setTranslationKey("ma." + name);
         this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 		this.setHardness(5.0F);
 		this.setResistance(10.0F);
@@ -194,7 +194,7 @@ public class BlockEssenceFurnace extends BlockContainer implements IEnableable {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        EnumFacing facing = EnumFacing.getFront(meta);
+        EnumFacing facing = EnumFacing.byIndex(meta);
 
         if (facing.getAxis() == EnumFacing.Axis.Y) {
             facing = EnumFacing.NORTH;

@@ -19,7 +19,8 @@ public class ItemMasterInfusionCrystal extends Item {
 	
 	public ItemMasterInfusionCrystal(){
 		super();
-		this.setUnlocalizedName("ma.master_infusion_crystal");
+        String name = "master_infusion_crystal";
+        this.setTranslationKey("ma." + name);
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 		this.setMaxStackSize(1);
 	}

@@ -31,7 +31,8 @@ public class BlockWitherproofBlock extends Block implements IEnableable {
 		super(Material.ROCK);
 		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
 		this.setSoundType(SoundType.STONE);
-		this.setUnlocalizedName("ma.witherproof_block");
+        String name = "witherproof_block";
+        this.setTranslationKey("ma." + name);
 		this.setHardness(24.0F);
 		this.setResistance(2000.0F);
 		this.setHarvestLevel("pickaxe", 1);
