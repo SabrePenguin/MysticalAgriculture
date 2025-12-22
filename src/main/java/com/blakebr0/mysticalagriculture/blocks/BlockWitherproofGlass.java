@@ -6,11 +6,6 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.blakebr0.cucumber.iface.IEnableable;
-import com.blakebr0.mysticalagriculture.MysticalAgriculture;
-import com.blakebr0.mysticalagriculture.config.ModConfig;
-import com.blakebr0.mysticalagriculture.lib.Tooltips;
-
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -28,33 +23,36 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.blakebr0.cucumber.iface.IEnableable;
+import com.blakebr0.mysticalagriculture.MysticalAgriculture;
+import com.blakebr0.mysticalagriculture.config.ModConfig;
+import com.blakebr0.mysticalagriculture.lib.Tooltips;
+
 public class BlockWitherproofGlass extends BlockGlass implements IEnableable {
-	
-	public BlockWitherproofGlass(){
-		super(Material.GLASS, false);
-		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
-		this.setSoundType(SoundType.GLASS);
+
+    public BlockWitherproofGlass() {
+        super(Material.GLASS, false);
+        this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
+        this.setSoundType(SoundType.GLASS);
         String name = "witherproof_glass";
         this.setTranslationKey("ma." + name);
-		this.setHardness(20.0F);
-		this.setResistance(1800.0F);
-		this.setHarvestLevel("pickaxe", 1);
-	}
-	
-	@Override
-	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity){
-		return !(entity instanceof EntityWither) && !(entity instanceof EntityWitherSkull);
-	}
+        this.setHardness(20.0F);
+        this.setResistance(1800.0F);
+        this.setHarvestLevel("pickaxe", 1);
+    }
 
-	@Override
-	public void onBlockExploded(World world, BlockPos pos, Explosion explosion){
+    @Override
+    public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
+        return !(entity instanceof EntityWither) && !(entity instanceof EntityWitherSkull);
+    }
 
-	}
+    @Override
+    public void onBlockExploded(World world, BlockPos pos, Explosion explosion) {}
 
-	@Override
-	public boolean canDropFromExplosion(Explosion explosion){
-		return false;
-	}
+    @Override
+    public boolean canDropFromExplosion(Explosion explosion) {
+        return false;
+    }
 
     @Override
     @Nonnull
@@ -62,29 +60,29 @@ public class BlockWitherproofGlass extends BlockGlass implements IEnableable {
         return BlockRenderLayer.TRANSLUCENT;
     }
 
-	@Override
-	public boolean isFullCube(IBlockState state){
-		return false;
-	}
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
 
-	@Override
-	public boolean isOpaqueCube(IBlockState state){
-		return false;
-	}
-	
-	@Override
-    public int quantityDropped(Random random){
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public int quantityDropped(Random random) {
         return 1;
     }
-	  
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced){
-		tooltip.add(Tooltips.BLAST_RESISTANT);
-	}
 
-	@Override
-	public boolean isEnabled(){
-		return ModConfig.confWitherproofBlocks;
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+        tooltip.add(Tooltips.BLAST_RESISTANT);
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return ModConfig.confWitherproofBlocks;
+    }
 }

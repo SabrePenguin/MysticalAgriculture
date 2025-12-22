@@ -12,29 +12,28 @@ import net.minecraft.world.World;
 
 public class BehaviorSeeds extends BehaviorDefaultDispenseItem {
 
-	private final IBlockState placeState;
+    private final IBlockState placeState;
 
-	public BehaviorSeeds(Block block) {
-		this(block.getDefaultState());
-	}
-	
-	public BehaviorSeeds(IBlockState state) {
-		this.placeState = state;
-	}
+    public BehaviorSeeds(Block block) {
+        this(block.getDefaultState());
+    }
 
-	@Override
-	public ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
-		EnumFacing facing = source.getBlockState().getValue(BlockDispenser.FACING);
-		BlockPos pos = source.getBlockPos().offset(facing);
-		World world = source.getWorld();
+    public BehaviorSeeds(IBlockState state) {
+        this.placeState = state;
+    }
 
-		if (world.isAirBlock(pos) && this.placeState.getBlock().canPlaceBlockAt(world, pos)) {
-			world.setBlockState(pos, this.placeState);
-			stack.shrink(1);
-			return stack;
-		}
+    @Override
+    public ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
+        EnumFacing facing = source.getBlockState().getValue(BlockDispenser.FACING);
+        BlockPos pos = source.getBlockPos().offset(facing);
+        World world = source.getWorld();
 
-		return super.dispenseStack(source, stack);
-	}
+        if (world.isAirBlock(pos) && this.placeState.getBlock().canPlaceBlockAt(world, pos)) {
+            world.setBlockState(pos, this.placeState);
+            stack.shrink(1);
+            return stack;
+        }
 
+        return super.dispenseStack(source, stack);
+    }
 }

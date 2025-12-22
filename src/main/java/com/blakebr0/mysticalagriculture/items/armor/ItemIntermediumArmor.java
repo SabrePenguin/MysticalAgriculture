@@ -5,12 +5,6 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import com.blakebr0.cucumber.iface.IRepairMaterial;
-import com.blakebr0.cucumber.lib.Colors;
-import com.blakebr0.mysticalagriculture.MysticalAgriculture;
-import com.blakebr0.mysticalagriculture.config.ModConfig;
-import com.blakebr0.mysticalagriculture.lib.Tooltips;
-
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -25,85 +19,96 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.blakebr0.cucumber.iface.IRepairMaterial;
+import com.blakebr0.cucumber.lib.Colors;
+import com.blakebr0.mysticalagriculture.MysticalAgriculture;
+import com.blakebr0.mysticalagriculture.config.ModConfig;
+import com.blakebr0.mysticalagriculture.lib.Tooltips;
+
 public class ItemIntermediumArmor extends ItemArmor implements IRepairMaterial {
 
-	private ItemStack repairMaterial;
-	
-	public ItemIntermediumArmor(String name, ArmorMaterial material, int index, EntityEquipmentSlot slot){
-		super(material, index, slot);
-        this.setTranslationKey("ma." + name);
-		this.setRegistryName(name);
-		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
-	    this.setMaxStackSize(1);
-	}
-		
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced){
-		int damage = stack.getMaxDamage() - stack.getItemDamage();
-		tooltip.add(Tooltips.DURABILITY + Colors.GOLD + damage);
-		if(ModConfig.confSetBonuses){ tooltip.add(Tooltips.SET_BONUS + Colors.GOLD + Tooltips.STEP_ASSIST); }
-	}
+    private ItemStack repairMaterial;
 
-	@Override
-	public void onArmorTick(World world, EntityPlayer player, ItemStack stack){
-		if(ModConfig.confSetBonuses && isFullSet(player)){
-			if(player.isInWater()){
-				player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 5, 0, true, false));
-			}
-		}
-	}
-	
-	@Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair){
+    public ItemIntermediumArmor(String name, ArmorMaterial material, int index, EntityEquipmentSlot slot) {
+        super(material, index, slot);
+        this.setTranslationKey("ma." + name);
+        this.setRegistryName(name);
+        this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
+        this.setMaxStackSize(1);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced) {
+        int damage = stack.getMaxDamage() - stack.getItemDamage();
+        tooltip.add(Tooltips.DURABILITY + Colors.GOLD + damage);
+        if (ModConfig.confSetBonuses) {
+            tooltip.add(Tooltips.SET_BONUS + Colors.GOLD + Tooltips.STEP_ASSIST);
+        }
+    }
+
+    @Override
+    public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
+        if (ModConfig.confSetBonuses && isFullSet(player)) {
+            if (player.isInWater()) {
+                player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 5, 0, true, false));
+            }
+        }
+    }
+
+    @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
         return OreDictionary.itemMatches(getRepairMaterial(), repair, false);
     }
 
-	@Override
-	public void setRepairMaterial(ItemStack stack){
-		repairMaterial = stack;
-	}
+    @Override
+    public void setRepairMaterial(ItemStack stack) {
+        repairMaterial = stack;
+    }
 
-	@Override
-	public ItemStack getRepairMaterial(){
-		return repairMaterial;
-	}
-	
-	public static boolean isFullSet(EntityPlayer player){		
-		ItemStack head = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-		ItemStack chest = player.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
-		ItemStack legs = player.getItemStackFromSlot(EntityEquipmentSlot.LEGS);
-		ItemStack feet = player.getItemStackFromSlot(EntityEquipmentSlot.FEET);
-		
-		return !head.isEmpty() && head.getItem() instanceof ItemIntermediumArmor && !chest.isEmpty() && chest.getItem() instanceof ItemIntermediumArmor && !legs.isEmpty() && legs.getItem() instanceof ItemIntermediumArmor && !feet.isEmpty() && feet.getItem() instanceof ItemIntermediumArmor;
-	}
-    
+    @Override
+    public ItemStack getRepairMaterial() {
+        return repairMaterial;
+    }
+
+    public static boolean isFullSet(EntityPlayer player) {
+        ItemStack head = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+        ItemStack chest = player.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
+        ItemStack legs = player.getItemStackFromSlot(EntityEquipmentSlot.LEGS);
+        ItemStack feet = player.getItemStackFromSlot(EntityEquipmentSlot.FEET);
+
+        return !head.isEmpty() && head.getItem() instanceof ItemIntermediumArmor && !chest.isEmpty() &&
+                chest.getItem() instanceof ItemIntermediumArmor && !legs.isEmpty() &&
+                legs.getItem() instanceof ItemIntermediumArmor && !feet.isEmpty() &&
+                feet.getItem() instanceof ItemIntermediumArmor;
+    }
+
     public static class AbilityHandler {
-    	
-    	public static List<String> playersWithSet = new ArrayList<String>();
-    	
-    	public static String playerKey(EntityPlayer player) {
-    		return player.getGameProfile().getName() + ":" + player.getEntityWorld().isRemote;
-    	}
-    	
-    	@SubscribeEvent
-    	public void updatePlayerAbilityStatus(LivingUpdateEvent event) {
-    		if(event.getEntityLiving() instanceof EntityPlayer) {
-    			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
-    			String key = playerKey(player);
 
-    			Boolean hasSet = ItemIntermediumArmor.isFullSet(player);
-    			if(playersWithSet.contains(key) && ModConfig.confSetBonuses){
-    				if(hasSet){
-    					player.stepHeight = 1.0625F;
-    				} else {
-    					player.stepHeight = 0.6F;
-    					playersWithSet.remove(key);
-    				}
-    			} else if(hasSet) {
-    				playersWithSet.add(key);
-    			}
-    		}
-    	}
+        public static List<String> playersWithSet = new ArrayList<String>();
+
+        public static String playerKey(EntityPlayer player) {
+            return player.getGameProfile().getName() + ":" + player.getEntityWorld().isRemote;
+        }
+
+        @SubscribeEvent
+        public void updatePlayerAbilityStatus(LivingUpdateEvent event) {
+            if (event.getEntityLiving() instanceof EntityPlayer) {
+                EntityPlayer player = (EntityPlayer) event.getEntityLiving();
+                String key = playerKey(player);
+
+                Boolean hasSet = ItemIntermediumArmor.isFullSet(player);
+                if (playersWithSet.contains(key) && ModConfig.confSetBonuses) {
+                    if (hasSet) {
+                        player.stepHeight = 1.0625F;
+                    } else {
+                        player.stepHeight = 0.6F;
+                        playersWithSet.remove(key);
+                    }
+                } else if (hasSet) {
+                    playersWithSet.add(key);
+                }
+            }
+        }
     }
 }

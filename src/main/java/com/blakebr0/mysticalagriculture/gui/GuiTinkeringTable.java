@@ -1,33 +1,34 @@
 package com.blakebr0.mysticalagriculture.gui;
 
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.translation.I18n;
+
 import org.lwjgl.opengl.GL11;
 
 import com.blakebr0.mysticalagriculture.MysticalAgriculture;
 import com.blakebr0.mysticalagriculture.tileentity.TileEntityTinkeringTable;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.translation.I18n;
-
 public class GuiTinkeringTable extends GuiContainer {
 
-    private static final ResourceLocation GUI = new ResourceLocation(MysticalAgriculture.MOD_ID, "textures/gui/tinkering_table_gui.png");
+    private static final ResourceLocation GUI = new ResourceLocation(MysticalAgriculture.MOD_ID,
+            "textures/gui/tinkering_table_gui.png");
 
     public GuiTinkeringTable(TileEntityTinkeringTable tileEntity, ContainerTinkeringTable container) {
         super(container);
         this.xSize = 176;
         this.ySize = 201;
     }
-    
+
     @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks){
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.renderHoveredToolTip(mouseX, mouseY);
     }
-    
+
     @Override
-    protected void drawGuiContainerForegroundLayer(int par1, int par2){
+    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         String s = I18n.translateToLocal("container.ma.tinkering_table.name");
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 5, 4210752);
         this.fontRenderer.drawString(I18n.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);

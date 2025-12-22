@@ -4,11 +4,6 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import com.blakebr0.cucumber.iface.IEnableable;
-import com.blakebr0.mysticalagriculture.MysticalAgriculture;
-import com.blakebr0.mysticalagriculture.config.ModConfig;
-import com.blakebr0.mysticalagriculture.lib.Tooltips;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -25,41 +20,45 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.blakebr0.cucumber.iface.IEnableable;
+import com.blakebr0.mysticalagriculture.MysticalAgriculture;
+import com.blakebr0.mysticalagriculture.config.ModConfig;
+import com.blakebr0.mysticalagriculture.lib.Tooltips;
+
 public class BlockWitherproofBlock extends Block implements IEnableable {
-	
-	public BlockWitherproofBlock(){
-		super(Material.ROCK);
-		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
-		this.setSoundType(SoundType.STONE);
+
+    public BlockWitherproofBlock() {
+        super(Material.ROCK);
+        this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
+        this.setSoundType(SoundType.STONE);
         String name = "witherproof_block";
         this.setTranslationKey("ma." + name);
-		this.setHardness(24.0F);
-		this.setResistance(2000.0F);
-		this.setHarvestLevel("pickaxe", 1);
-	} 
+        this.setHardness(24.0F);
+        this.setResistance(2000.0F);
+        this.setHarvestLevel("pickaxe", 1);
+    }
 
-	@Override
-	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity){
-		return !(entity instanceof EntityWither) && !(entity instanceof EntityWitherSkull);
-	}
+    @Override
+    public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
+        return !(entity instanceof EntityWither) && !(entity instanceof EntityWitherSkull);
+    }
 
-	@Override
-	public void onBlockExploded(World world, BlockPos pos, Explosion explosion){
-	}
+    @Override
+    public void onBlockExploded(World world, BlockPos pos, Explosion explosion) {}
 
-	@Override
-	public boolean canDropFromExplosion(Explosion explosion){
-		return false;
-	}
-	  
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced){
-		tooltip.add(Tooltips.BLAST_RESISTANT);
-	}
+    @Override
+    public boolean canDropFromExplosion(Explosion explosion) {
+        return false;
+    }
 
-	@Override
-	public boolean isEnabled(){
-		return ModConfig.confWitherproofBlocks;
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+        tooltip.add(Tooltips.BLAST_RESISTANT);
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return ModConfig.confWitherproofBlocks;
+    }
 }

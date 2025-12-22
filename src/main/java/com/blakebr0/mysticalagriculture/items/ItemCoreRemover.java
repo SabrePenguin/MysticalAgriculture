@@ -4,11 +4,6 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import com.blakebr0.cucumber.lib.Colors;
-import com.blakebr0.mysticalagriculture.MysticalAgriculture;
-import com.blakebr0.mysticalagriculture.config.ModConfig;
-import com.blakebr0.mysticalagriculture.lib.Tooltips;
-
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,20 +11,25 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.blakebr0.cucumber.lib.Colors;
+import com.blakebr0.mysticalagriculture.MysticalAgriculture;
+import com.blakebr0.mysticalagriculture.config.ModConfig;
+import com.blakebr0.mysticalagriculture.lib.Tooltips;
+
 public class ItemCoreRemover extends Item {
-	
-	public ItemCoreRemover(){
-		super();
+
+    public ItemCoreRemover() {
+        super();
         String name = "core_remover";
         this.setTranslationKey("ma." + name);
-		this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
-		this.setMaxStackSize(1);
-		this.setMaxDamage(ModConfig.confRemoverDurability - 1);
-		this.setNoRepair();
-	}
+        this.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
+        this.setMaxStackSize(1);
+        this.setMaxDamage(ModConfig.confRemoverDurability - 1);
+        this.setNoRepair();
+    }
 
-	@Override
-    public ItemStack getContainerItem(ItemStack itemstack){
+    @Override
+    public ItemStack getContainerItem(ItemStack itemstack) {
         ItemStack stack = itemstack.copy();
 
         stack.setItemDamage(stack.getItemDamage() + 1);
@@ -39,14 +39,14 @@ public class ItemCoreRemover extends Item {
     }
 
     @Override
-    public boolean hasContainerItem(ItemStack stack){
+    public boolean hasContainerItem(ItemStack stack) {
         return true;
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced){
-    	int damage = stack.getMaxDamage() - stack.getItemDamage() + 1;
-    	tooltip.add(Tooltips.USES_LEFT + Colors.RED + damage);
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+        int damage = stack.getMaxDamage() - stack.getItemDamage() + 1;
+        tooltip.add(Tooltips.USES_LEFT + Colors.RED + damage);
     }
 }

@@ -6,19 +6,19 @@ import net.minecraft.item.ItemStack;
 
 public class ItemBlockIngotStorage extends ItemBlock {
 
-	public ItemBlockIngotStorage(Block block){
-		super(block);
-		this.setHasSubtypes(true);
-		this.setMaxDamage(0);
-	}
-	
-	@Override
-	public String getTranslationKey(ItemStack stack){
-		return super.getTranslationKey() + "_" + BlockIngotStorage.Type.byMetadata(stack.getMetadata()).getName();
-	}
-	
-	@Override
-	public int getMetadata(int damage){
-		return damage;
-	}
+    public ItemBlockIngotStorage(Block block) {
+        super(block);
+        this.setHasSubtypes(true);
+        this.setMaxDamage(0);
+    }
+
+    @Override
+    public String getTranslationKey(ItemStack stack) {
+        return super.getTranslationKey() + "_" + BlockIngotStorage.Type.byMetadata(stack.getMetadata()).getName();
+    }
+
+    @Override
+    public int getMetadata(int damage) {
+        return damage;
+    }
 }

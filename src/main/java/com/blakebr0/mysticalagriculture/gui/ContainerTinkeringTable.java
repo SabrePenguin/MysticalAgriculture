@@ -2,13 +2,6 @@ package com.blakebr0.mysticalagriculture.gui;
 
 import javax.annotation.Nullable;
 
-import com.blakebr0.mysticalagriculture.crafting.TinkeringTableCraftResult;
-import com.blakebr0.mysticalagriculture.crafting.TinkeringTableCrafting;
-import com.blakebr0.mysticalagriculture.crafting.TinkeringTableManager;
-import com.blakebr0.mysticalagriculture.handler.TinkeringTableResultHandler;
-import com.blakebr0.mysticalagriculture.handler.TinkeringTableStackHandler;
-import com.blakebr0.mysticalagriculture.tileentity.TileEntityTinkeringTable;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -20,6 +13,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+import com.blakebr0.mysticalagriculture.crafting.TinkeringTableCraftResult;
+import com.blakebr0.mysticalagriculture.crafting.TinkeringTableCrafting;
+import com.blakebr0.mysticalagriculture.crafting.TinkeringTableManager;
+import com.blakebr0.mysticalagriculture.handler.TinkeringTableResultHandler;
+import com.blakebr0.mysticalagriculture.handler.TinkeringTableStackHandler;
+import com.blakebr0.mysticalagriculture.tileentity.TileEntityTinkeringTable;
+
 public class ContainerTinkeringTable extends Container {
 
     public InventoryCrafting matrix;
@@ -28,8 +28,8 @@ public class ContainerTinkeringTable extends Container {
     private IItemHandler handler;
     private World world;
 
-    public ContainerTinkeringTable(InventoryPlayer player, TileEntityTinkeringTable tile, World world){
-    	this.world = world;
+    public ContainerTinkeringTable(InventoryPlayer player, TileEntityTinkeringTable tile, World world) {
+        this.world = world;
         this.tile = tile;
         this.handler = tile.matrix;
         this.matrix = new TinkeringTableCrafting(this, tile);
@@ -58,18 +58,18 @@ public class ContainerTinkeringTable extends Container {
         }
 
         this.onCraftMatrixChanged(this.matrix);
-        ((TinkeringTableStackHandler)handler).crafting = matrix;
+        ((TinkeringTableStackHandler) handler).crafting = matrix;
     }
 
     public void onCraftMatrixChanged(IInventory matrix) {
-        this.result.setInventorySlotContents(0, TinkeringTableManager.getInstance().findMatchingRecipe(this.matrix, this.tile.getWorld()));
+        this.result.setInventorySlotContents(0,
+                TinkeringTableManager.getInstance().findMatchingRecipe(this.matrix, this.tile.getWorld()));
         this.tile.markDirty();
     }
 
     @Override
-    public void onContainerClosed(EntityPlayer player){
+    public void onContainerClosed(EntityPlayer player) {
         super.onContainerClosed(player);
-
     }
 
     @Override
@@ -83,17 +83,17 @@ public class ContainerTinkeringTable extends Container {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(slotNumber);
 
-        if(slot != null && slot.getHasStack()) {
+        if (slot != null && slot.getHasStack()) {
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
             if (slotNumber == 0) {
-                if(!this.mergeItemStack(itemstack1, 10, 46, true)){
+                if (!this.mergeItemStack(itemstack1, 10, 46, true)) {
                     return ItemStack.EMPTY;
                 }
 
                 slot.onSlotChange(itemstack1, itemstack);
-            } else if(slotNumber >= 10 && slotNumber < 37){
+            } else if (slotNumber >= 10 && slotNumber < 37) {
                 if (!this.mergeItemStack(itemstack1, 37, 46, false)) {
                     return ItemStack.EMPTY;
                 }
@@ -101,7 +101,7 @@ public class ContainerTinkeringTable extends Container {
                 if (!this.mergeItemStack(itemstack1, 10, 37, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if(!this.mergeItemStack(itemstack1, 10, 46, false)) {
+            } else if (!this.mergeItemStack(itemstack1, 10, 46, false)) {
                 return ItemStack.EMPTY;
             }
 
