@@ -31,6 +31,7 @@ public class ModConfig {
     public static boolean confMysticalFertilizer;
     public static boolean confSeedReprocessor;
     public static boolean confGenericOreDictEssence;
+    public static boolean confEnableCustomSeeds;
 
     public static boolean confGearModuleOverride;
     public static boolean confSupremiumFlight;
@@ -139,6 +140,8 @@ public class ModConfig {
                 "Should the Seed Reprocessor be enabled?");
         confGenericOreDictEssence = config.getBoolean("generic_ore_dict_essence", category, true,
                 "Should the resource essences/seeds be added to the OreDictionary as essenceTier1, seedsTier1, etc.?");
+        confEnableCustomSeeds = config.getBoolean("enable_custom_seeds", category, true,
+                "Should custom seeds be enabled?");
 
         category = "Seeds";
         config.addCustomCategoryComment(category, "Enable/Disable seeds individually." + "\n0: Disable the seed." +
