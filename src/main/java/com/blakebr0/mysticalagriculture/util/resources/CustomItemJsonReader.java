@@ -3,29 +3,34 @@ package com.blakebr0.mysticalagriculture.util.resources;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
-import com.google.gson.*;
 import net.minecraft.client.Minecraft;
 
 import com.blakebr0.mysticalagriculture.MysticalAgriculture;
+import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 
 public class CustomItemJsonReader {
 
     private static final File RESOURCE_DIR = new File(Minecraft.getMinecraft().gameDir,
-            "resources/mysticalagriculture");
+            "config/mysticalagriculture");
     public static final Gson GSON = new Gson();
     public static final JsonParser parser = new JsonParser();
 
     public static Set<CustomItemHolder> loadResources() {
         Set<CustomItemHolder> items = new HashSet<>();
-        File[] files = RESOURCE_DIR.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                items.addAll(loadJson(file));
-            }
+        try (Stream<Path> path = Files.walk(RESOURCE_DIR.toPath())) {
+            path.filter(Files::isRegularFile)
+                    .filter(file -> file.getFileName().toString().endsWith(".json"))
+                    .forEach(file -> items.addAll(CustomItemJsonReader.loadJson(file.toFile())));
+        } catch (IOException e) {
+            MysticalAgriculture.LOGGER.error("Unable to read file: {}", e.getLocalizedMessage());
         }
         return items;
     }
@@ -44,7 +49,7 @@ public class CustomItemJsonReader {
                             items.add(newItem);
                         }
                     } else if (root.isJsonArray()) {
-                        for(JsonElement element: root.getAsJsonArray()) {
+                        for (JsonElement element : root.getAsJsonArray()) {
                             CustomItemHolder newItem = CustomItemHolder.validate(element.getAsJsonObject());
                             if (newItem != null) {
                                 items.add(newItem);
