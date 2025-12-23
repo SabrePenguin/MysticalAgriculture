@@ -15,7 +15,7 @@ import com.google.gson.stream.JsonReader;
 public class CustomItemJsonReader {
 
     private static final File RESOURCE_DIR = new File(Minecraft.getMinecraft().gameDir,
-            "resources/mystical_agriculture");
+            "resources/mysticalagriculture");
     public static final Gson GSON = new Gson();
     public static final JsonParser parser = new JsonParser();
 
