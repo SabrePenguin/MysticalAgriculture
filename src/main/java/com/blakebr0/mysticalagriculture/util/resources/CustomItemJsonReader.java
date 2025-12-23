@@ -62,11 +62,19 @@ public class CustomItemJsonReader {
     }
 
     public static class CustomItemHolder {
+
+        public enum RecipeType {
+            BOX,
+            CROSS,
+            NONE
+        }
+
         public String name;
         public int tier;
-        public CustomItemHolder(String name, int tier) {
-            this.name = name;
-            this.tier = tier;
+        public RecipeType type;
+
+        public CustomItemHolder() {
+            this.type = RecipeType.NONE;
         }
 
         public static CustomItemHolder validate(JsonObject object) {

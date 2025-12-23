@@ -24,6 +24,7 @@ import com.blakebr0.mysticalagriculture.crafting.ReprocessorManager;
 import com.blakebr0.mysticalagriculture.entity.ModEntities;
 import com.blakebr0.mysticalagriculture.handler.GuiHandler;
 import com.blakebr0.mysticalagriculture.handler.MobDrops;
+import com.blakebr0.mysticalagriculture.items.CustomItems;
 import com.blakebr0.mysticalagriculture.items.ModItems;
 import com.blakebr0.mysticalagriculture.items.armor.ItemIntermediumArmor;
 import com.blakebr0.mysticalagriculture.items.armor.ItemSuperiumArmor;
@@ -52,6 +53,7 @@ public class CommonProxy {
         ModBlocks.init();
         ModItems.init();
         ModEntities.init();
+        CustomItems.init();
 
         MinecraftForge.EVENT_BUS.register(MysticalAgriculture.REGISTRY);
 
