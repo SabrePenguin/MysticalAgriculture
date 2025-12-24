@@ -18,6 +18,7 @@ import com.blakebr0.mysticalagriculture.MysticalAgriculture;
 import com.blakebr0.mysticalagriculture.blocks.ModBlocks;
 import com.blakebr0.mysticalagriculture.config.EssenceConfig;
 import com.blakebr0.mysticalagriculture.config.ModConfig;
+import com.blakebr0.mysticalagriculture.crafting.CustomRecipes;
 import com.blakebr0.mysticalagriculture.crafting.EssenceRecipes;
 import com.blakebr0.mysticalagriculture.crafting.ModRecipes;
 import com.blakebr0.mysticalagriculture.crafting.ReprocessorManager;
@@ -112,5 +113,6 @@ public class CommonProxy {
         Parts.getParts();
         ModRecipes.initRecipes();
         EssenceRecipes.init();
+        CustomRecipes.init();
     }
 }

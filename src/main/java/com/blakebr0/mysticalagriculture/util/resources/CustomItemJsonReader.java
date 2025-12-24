@@ -75,7 +75,10 @@ public class CustomItemJsonReader {
         }
 
         public String name;
+        public String input_item;
+        public String output_item;
         public int tier;
+        public int output_count;
         public RecipeType type;
 
         public CustomItemHolder() {
@@ -84,8 +87,21 @@ public class CustomItemJsonReader {
 
         public static CustomItemHolder validate(JsonObject object) {
             CustomItemHolder item = GSON.fromJson(object, CustomItemHolder.class);
+            // This is necessary. Without this, there's no registry name
             if (item.name == null || item.name.isEmpty()) {
                 return null;
+            }
+            // Technically this can be skipped. TODO
+            if (item.input_item == null || item.input_item.isEmpty()) {
+                return null;
+            }
+            // The user has not specified an item output, so we don't actually
+            // want to auto-generate a recipe for them
+            if (item.output_item == null && item.type != RecipeType.NONE) {
+                item.type = RecipeType.NONE;
+            }
+            if (item.output_count <= 0) {
+                item.output_count = 1;
             }
             return item;
         }
