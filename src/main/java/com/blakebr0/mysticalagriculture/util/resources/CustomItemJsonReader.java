@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import net.minecraft.client.Minecraft;
+import net.minecraftforge.fml.common.Loader;
 
 import com.blakebr0.mysticalagriculture.MysticalAgriculture;
 import com.blakebr0.mysticalagriculture.items.custom.CustomRecipeType;
@@ -19,14 +19,13 @@ import com.google.gson.stream.JsonReader;
 
 public class CustomItemJsonReader {
 
-    private static final File RESOURCE_DIR = new File(Minecraft.getMinecraft().gameDir,
-            "config/mysticalagriculture");
     public static final Gson GSON = new Gson();
     public static final JsonParser parser = new JsonParser();
 
     public static Set<CustomItemHolder> loadResources() {
+        File resource_dir = new File(Loader.instance().getConfigDir(), "mysticalagriculture");
         Set<CustomItemHolder> items = new HashSet<>();
-        try (Stream<Path> path = Files.walk(RESOURCE_DIR.toPath())) {
+        try (Stream<Path> path = Files.walk(resource_dir.toPath())) {
             path.filter(Files::isRegularFile)
                     .filter(file -> file.getFileName().toString().endsWith(".json"))
                     .forEach(file -> items.addAll(CustomItemJsonReader.loadJson(file.toFile())));
