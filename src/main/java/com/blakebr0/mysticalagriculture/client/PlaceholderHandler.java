@@ -1,9 +1,5 @@
 package com.blakebr0.mysticalagriculture.client;
 
-import java.io.IOException;
-
-import com.blakebr0.mysticalagriculture.items.custom.CustomItem;
-import com.blakebr0.mysticalagriculture.items.custom.CustomItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.state.IBlockState;
@@ -17,6 +13,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 import com.blakebr0.mysticalagriculture.MysticalAgriculture;
+import com.blakebr0.mysticalagriculture.items.custom.CustomItem;
+import com.blakebr0.mysticalagriculture.items.custom.CustomItems;
 
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MysticalAgriculture.MOD_ID)
 public class PlaceholderHandler {
@@ -28,8 +26,7 @@ public class PlaceholderHandler {
             new ResourceLocation(MysticalAgriculture.MOD_ID, "placeholder_seeds"),
             "inventory");
     private static final ResourceLocation CROP = new ResourceLocation(
-            MysticalAgriculture.MOD_ID, "placeholder_crop"
-    );
+            MysticalAgriculture.MOD_ID, "placeholder_crop");
     private static final ModelResourceLocation CROP_MODEL = new ModelResourceLocation(
             CROP, "inventory");
 
@@ -57,8 +54,7 @@ public class PlaceholderHandler {
             if (essenceModel == missing || isMissing(essenceModel)) {
                 event.getModelRegistry().putObject(
                         essenceModelLoc,
-                        placeholderEssenceModel
-                );
+                        placeholderEssenceModel);
             }
 
             ModelResourceLocation seedModelLoc = new ModelResourceLocation(
@@ -67,8 +63,7 @@ public class PlaceholderHandler {
             if (model == missing || isMissing(model)) {
                 event.getModelRegistry().putObject(
                         seedModelLoc,
-                        placeholderSeedModel
-                );
+                        placeholderSeedModel);
             }
 
             ModelResourceLocation cropModelLoc = new ModelResourceLocation(
@@ -77,30 +72,26 @@ public class PlaceholderHandler {
             if (model == missing || isMissing(cropModel)) {
                 event.getModelRegistry().putObject(
                         cropModelLoc,
-                        placeholderCropModel
-                );
+                        placeholderCropModel);
             }
-
 
             Block block = item.block();
 
-            for (IBlockState state: block.getBlockState().getValidStates()) {
+            for (IBlockState state : block.getBlockState().getValidStates()) {
                 ModelResourceLocation blockState = new ModelResourceLocation(
-                        block.getRegistryName(), "age=" + state.getValue(BlockCrops.AGE)
-                );
+                        block.getRegistryName(), "age=" + state.getValue(BlockCrops.AGE));
                 IBakedModel stateModel = manager.getModel(blockState);
 
                 if (stateModel == missing || isMissing(stateModel)) {
-                    IBakedModel replacement = manager.getModel(new ModelResourceLocation(CROP, "age=" + state.getValue(BlockCrops.AGE)));
+                    IBakedModel replacement = manager
+                            .getModel(new ModelResourceLocation(CROP, "age=" + state.getValue(BlockCrops.AGE)));
                     event.getModelRegistry().putObject(
                             blockState,
-                            replacement
-                    );
+                            replacement);
                 }
             }
         }
     }
-
 
     private static boolean isMissing(IBakedModel model) {
         if (model == null) return true;
