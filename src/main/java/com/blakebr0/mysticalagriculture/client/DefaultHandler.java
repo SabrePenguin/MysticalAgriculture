@@ -1,5 +1,6 @@
 package com.blakebr0.mysticalagriculture.client;
 
+import com.blakebr0.mysticalagriculture.config.ModConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.state.IBlockState;
@@ -42,6 +43,9 @@ public class DefaultHandler {
 
     @SubscribeEvent
     public static void onModelBake(ModelBakeEvent event) {
+        if (!ModConfig.confEnableDefaultSeedTexture) {
+            return;
+        }
         ModelManager manager = event.getModelManager();
         IBakedModel defaultEssenceModel = manager.getModel(ESSENCE_MODEL);
         IBakedModel defaultSeedModel = manager.getModel(SEED_MODEL);

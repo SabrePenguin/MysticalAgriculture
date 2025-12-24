@@ -9,6 +9,8 @@ import com.blakebr0.mysticalagriculture.blocks.crop.BlockMysticalCrop;
 import com.blakebr0.mysticalagriculture.config.ModConfig;
 import com.blakebr0.mysticalagriculture.items.ItemSeed;
 import com.blakebr0.mysticalagriculture.util.resources.CustomItemJsonReader;
+import net.minecraft.block.BlockCrops;
+import net.minecraft.item.Item;
 
 public class CustomItems {
 
@@ -20,6 +22,20 @@ public class CustomItems {
 
     public static void init() {
         if (ModConfig.confEnableCustomSeeds) {
+            if (ModConfig.confEnableDefaultSeedTexture) {
+                final ModRegistry registry = MysticalAgriculture.REGISTRY;
+
+                BlockCrops blockCrop = new BlockMysticalCrop("default_crop");
+                registry.register(blockCrop, "default_crop");
+                Item defaultEssence = new Item();
+                registry.register(defaultEssence, "default_essence");
+                Item defaultSeeds = new Item();
+                registry.register(defaultSeeds, "default_seeds");
+                customItems.add(
+                        new CustomItem("default", defaultEssence, defaultSeeds, blockCrop, 1, null, 1,
+                                null, CustomRecipeType.NONE));
+            }
+
             Set<CustomItemJsonReader.CustomItemHolder> itemHolderSet = CustomItemJsonReader.loadResources();
             for (CustomItemJsonReader.CustomItemHolder item : itemHolderSet) {
                 final ModRegistry registry = MysticalAgriculture.REGISTRY;

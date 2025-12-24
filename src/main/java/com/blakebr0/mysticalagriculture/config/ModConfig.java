@@ -32,6 +32,7 @@ public class ModConfig {
     public static boolean confSeedReprocessor;
     public static boolean confGenericOreDictEssence;
     public static boolean confEnableCustomSeeds;
+    public static boolean confEnableDefaultSeedTexture;
 
     public static boolean confGearModuleOverride;
     public static boolean confSupremiumFlight;
@@ -142,6 +143,10 @@ public class ModConfig {
                 "Should the resource essences/seeds be added to the OreDictionary as essenceTier1, seedsTier1, etc.?");
         confEnableCustomSeeds = config.getBoolean("enable_custom_seeds", category, true,
                 "Should custom seeds be enabled?");
+        confEnableDefaultSeedTexture = config.getBoolean("enable_default_texture", category, false,
+                "Should the default custom seed texture be enabled?\nThis will prevent missing textures, but generates null items. Useful for " +
+                "creating and testing new seeds before making textures."
+        );
 
         category = "Seeds";
         config.addCustomCategoryComment(category, "Enable/Disable seeds individually." + "\n0: Disable the seed." +
