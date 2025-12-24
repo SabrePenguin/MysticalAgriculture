@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 import net.minecraft.client.Minecraft;
 
 import com.blakebr0.mysticalagriculture.MysticalAgriculture;
+import com.blakebr0.mysticalagriculture.items.custom.CustomRecipeType;
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 
@@ -68,21 +69,15 @@ public class CustomItemJsonReader {
 
     public static class CustomItemHolder {
 
-        public enum RecipeType {
-            BOX,
-            CROSS,
-            NONE
-        }
-
         public String name;
         public String input_item;
         public String output_item;
         public int tier;
         public int output_count;
-        public RecipeType type;
+        public CustomRecipeType type;
 
         public CustomItemHolder() {
-            this.type = RecipeType.NONE;
+            this.type = CustomRecipeType.NONE;
         }
 
         public static CustomItemHolder validate(JsonObject object) {
@@ -97,8 +92,8 @@ public class CustomItemJsonReader {
             }
             // The user has not specified an item output, so we don't actually
             // want to auto-generate a recipe for them
-            if (item.output_item == null && item.type != RecipeType.NONE) {
-                item.type = RecipeType.NONE;
+            if (item.output_item == null && item.type != CustomRecipeType.NONE) {
+                item.type = CustomRecipeType.NONE;
             }
             if (item.output_count <= 0) {
                 item.output_count = 1;

@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import com.blakebr0.cucumber.helper.RecipeHelper;
 import com.blakebr0.mysticalagriculture.items.custom.CustomItem;
 import com.blakebr0.mysticalagriculture.items.custom.CustomItems;
-import com.blakebr0.mysticalagriculture.util.resources.CustomItemJsonReader;
+import com.blakebr0.mysticalagriculture.items.custom.CustomRecipeType;
 
 public class CustomRecipes {
 
@@ -32,12 +32,12 @@ public class CustomRecipes {
                 ItemStack stack = new ItemStack(i);
 
                 addSeedRecipe(item, stack);
-                if (item.type() == CustomItemJsonReader.CustomItemHolder.RecipeType.BOX) {
+                if (item.type() == CustomRecipeType.BOX) {
                     Item o = ForgeRegistries.ITEMS.getValue(new ResourceLocation(item.output()));
                     EssenceRecipes.addEssenceRecipe(new ItemStack(o, item.outputCount()),
                             "EEE", "E E", "EEE", 'E', new ItemStack(item.crop(), 1));
                 }
-                if (item.type() == CustomItemJsonReader.CustomItemHolder.RecipeType.CROSS) {
+                if (item.type() == CustomRecipeType.CROSS) {
                     Item o = ForgeRegistries.ITEMS.getValue(new ResourceLocation(item.output()));
                     EssenceRecipes.addEssenceRecipe(new ItemStack(o, item.outputCount()),
                             " E ", "EEE", " E ", 'E', new ItemStack(item.crop(), 1));
