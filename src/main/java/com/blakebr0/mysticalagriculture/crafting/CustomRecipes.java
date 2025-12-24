@@ -9,12 +9,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import com.blakebr0.cucumber.helper.RecipeHelper;
-import com.blakebr0.mysticalagriculture.items.CustomItems;
+import com.blakebr0.mysticalagriculture.items.custom.CustomItem;
+import com.blakebr0.mysticalagriculture.items.custom.CustomItems;
 import com.blakebr0.mysticalagriculture.util.resources.CustomItemJsonReader;
 
 public class CustomRecipes {
 
-    public static void addSeedRecipe(CustomItems.CustomItem type, Object input) {
+    public static void addSeedRecipe(CustomItem type, Object input) {
         RecipeHelper.addShapedRecipe(new ItemStack(type.seed(), 1, 0),
                 "MEM",
                 "ESE",
@@ -25,7 +26,7 @@ public class CustomRecipes {
     }
 
     public static void init() {
-        for (CustomItems.CustomItem item : CustomItems.getCustomItems()) {
+        for (CustomItem item : CustomItems.getCustomItems()) {
             Item i = ForgeRegistries.ITEMS.getValue(new ResourceLocation(item.input()));
             if (i != null) {
                 ItemStack stack = new ItemStack(i);
