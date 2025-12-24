@@ -25,6 +25,7 @@ public class CustomItems {
                 final ModRegistry registry = MysticalAgriculture.REGISTRY;
 
                 BlockMysticalCrop blockCrop = new BlockMysticalCrop(item.name + "_crop");
+                registry.register(blockCrop, item.name + "_crop");
 
                 ItemBase crop = new ItemBase("ma." + item.name + "_essence");
                 registry.register(crop, item.name + "_essence");
@@ -32,7 +33,6 @@ public class CustomItems {
                     registry.addOre(crop, "essenceTier" + item.tier);
                 }
                 crop.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
-                registry.register(blockCrop, item.name + "_crop");
 
                 ItemSeed seed = new ItemSeed(item.name + "_seed", blockCrop, item.tier);
                 registry.register(seed, item.name + "_seeds");
@@ -41,7 +41,7 @@ public class CustomItems {
                 }
                 seed.setCreativeTab(MysticalAgriculture.CREATIVE_TAB);
                 customItems.add(
-                        new CustomItem(item.name, crop, seed, item.tier, item.input_item, item.output_count,
+                        new CustomItem(item.name, crop, seed, blockCrop, item.tier, item.input_item, item.output_count,
                                 item.output_item, item.type));
                 // Equivalent to set()
                 blockCrop.setCrop(crop);
