@@ -70,9 +70,9 @@ public class CustomItemJsonReader {
     public static class CustomItemHolder {
 
         public String name;
+        public int tier;
         public String input_item;
         public String output_item;
-        public int tier;
         public int output_count;
         public CustomRecipeType type;
 
@@ -86,9 +86,9 @@ public class CustomItemJsonReader {
             if (item.name == null || item.name.isEmpty()) {
                 return null;
             }
-            // Technically this can be skipped. TODO
+            // The user may not want to create a recipe for the seeds
             if (item.input_item == null || item.input_item.isEmpty()) {
-                return null;
+                item.input_item = null;
             }
             // The user has not specified an item output, so we don't actually
             // want to auto-generate a recipe for them

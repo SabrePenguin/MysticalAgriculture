@@ -27,18 +27,23 @@ public class CustomRecipes {
 
     public static void init() {
         for (CustomItem item : CustomItems.getCustomItems()) {
-            Item i = ForgeRegistries.ITEMS.getValue(new ResourceLocation(item.input()));
-            if (i != null) {
-                ItemStack stack = new ItemStack(i);
-
-                addSeedRecipe(item, stack);
-                if (item.type() == CustomRecipeType.BOX) {
-                    Item o = ForgeRegistries.ITEMS.getValue(new ResourceLocation(item.output()));
+            if (item.input() != null) {
+                Item i = ForgeRegistries.ITEMS.getValue(new ResourceLocation(item.input()));
+                if (i != null) {
+                    ItemStack stack = new ItemStack(i);
+                    addSeedRecipe(item, stack);
+                }
+            }
+            if (item.type() == CustomRecipeType.BOX) {
+                Item o = ForgeRegistries.ITEMS.getValue(new ResourceLocation(item.output()));
+                if (o != null) {
                     EssenceRecipes.addEssenceRecipe(new ItemStack(o, item.outputCount()),
                             "EEE", "E E", "EEE", 'E', new ItemStack(item.crop(), 1));
                 }
-                if (item.type() == CustomRecipeType.CROSS) {
-                    Item o = ForgeRegistries.ITEMS.getValue(new ResourceLocation(item.output()));
+            }
+            if (item.type() == CustomRecipeType.CROSS) {
+                Item o = ForgeRegistries.ITEMS.getValue(new ResourceLocation(item.output()));
+                if (o != null) {
                     EssenceRecipes.addEssenceRecipe(new ItemStack(o, item.outputCount()),
                             " E ", "EEE", " E ", 'E', new ItemStack(item.crop(), 1));
                 }
