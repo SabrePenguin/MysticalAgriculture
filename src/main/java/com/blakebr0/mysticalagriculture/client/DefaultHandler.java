@@ -17,16 +17,16 @@ import com.blakebr0.mysticalagriculture.items.custom.CustomItem;
 import com.blakebr0.mysticalagriculture.items.custom.CustomItems;
 
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MysticalAgriculture.MOD_ID)
-public class PlaceholderHandler {
+public class DefaultHandler {
 
     private static final ModelResourceLocation ESSENCE_MODEL = new ModelResourceLocation(
-            new ResourceLocation(MysticalAgriculture.MOD_ID, "placeholder_essence"),
+            new ResourceLocation(MysticalAgriculture.MOD_ID, "default_essence"),
             "inventory");
     private static final ModelResourceLocation SEED_MODEL = new ModelResourceLocation(
-            new ResourceLocation(MysticalAgriculture.MOD_ID, "placeholder_seeds"),
+            new ResourceLocation(MysticalAgriculture.MOD_ID, "default_seeds"),
             "inventory");
     private static final ResourceLocation CROP = new ResourceLocation(
-            MysticalAgriculture.MOD_ID, "placeholder_crop");
+            MysticalAgriculture.MOD_ID, "default_crop");
     private static final ModelResourceLocation CROP_MODEL = new ModelResourceLocation(
             CROP, "inventory");
 
@@ -43,9 +43,9 @@ public class PlaceholderHandler {
     @SubscribeEvent
     public static void onModelBake(ModelBakeEvent event) {
         ModelManager manager = event.getModelManager();
-        IBakedModel placeholderEssenceModel = manager.getModel(ESSENCE_MODEL);
-        IBakedModel placeholderSeedModel = manager.getModel(SEED_MODEL);
-        IBakedModel placeholderCropModel = manager.getModel(CROP_MODEL);
+        IBakedModel defaultEssenceModel = manager.getModel(ESSENCE_MODEL);
+        IBakedModel defaultSeedModel = manager.getModel(SEED_MODEL);
+        IBakedModel defaultCropModel = manager.getModel(CROP_MODEL);
         IBakedModel missing = manager.getMissingModel();
         for (CustomItem item : CustomItems.getCustomItems()) {
             ModelResourceLocation essenceModelLoc = new ModelResourceLocation(
@@ -54,7 +54,7 @@ public class PlaceholderHandler {
             if (essenceModel == missing || isMissing(essenceModel)) {
                 event.getModelRegistry().putObject(
                         essenceModelLoc,
-                        placeholderEssenceModel);
+                        defaultEssenceModel);
             }
 
             ModelResourceLocation seedModelLoc = new ModelResourceLocation(
@@ -63,7 +63,7 @@ public class PlaceholderHandler {
             if (model == missing || isMissing(model)) {
                 event.getModelRegistry().putObject(
                         seedModelLoc,
-                        placeholderSeedModel);
+                        defaultSeedModel);
             }
 
             ModelResourceLocation cropModelLoc = new ModelResourceLocation(
@@ -72,7 +72,7 @@ public class PlaceholderHandler {
             if (model == missing || isMissing(cropModel)) {
                 event.getModelRegistry().putObject(
                         cropModelLoc,
-                        placeholderCropModel);
+                        defaultCropModel);
             }
 
             Block block = item.block();
