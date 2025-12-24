@@ -48,6 +48,7 @@ public class PlaceholderHandler {
         ModelManager manager = event.getModelManager();
         IBakedModel placeholderEssenceModel = manager.getModel(ESSENCE_MODEL);
         IBakedModel placeholderSeedModel = manager.getModel(SEED_MODEL);
+        IBakedModel placeholderCropModel = manager.getModel(CROP_MODEL);
         IBakedModel missing = manager.getMissingModel();
         for (CustomItem item : CustomItems.getCustomItems()) {
             ModelResourceLocation essenceModelLoc = new ModelResourceLocation(
@@ -67,6 +68,16 @@ public class PlaceholderHandler {
                 event.getModelRegistry().putObject(
                         seedModelLoc,
                         placeholderSeedModel
+                );
+            }
+
+            ModelResourceLocation cropModelLoc = new ModelResourceLocation(
+                    new ResourceLocation(MysticalAgriculture.MOD_ID, item.name() + "_crop"), "inventory");
+            IBakedModel cropModel = manager.getModel(cropModelLoc);
+            if (model == missing || isMissing(cropModel)) {
+                event.getModelRegistry().putObject(
+                        cropModelLoc,
+                        placeholderCropModel
                 );
             }
 
