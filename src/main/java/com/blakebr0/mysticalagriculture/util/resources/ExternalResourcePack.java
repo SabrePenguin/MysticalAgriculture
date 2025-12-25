@@ -11,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.IResourcePack;
 import net.minecraft.client.resources.SimpleReloadableResourceManager;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import com.blakebr0.mysticalagriculture.MysticalAgriculture;
@@ -44,6 +45,11 @@ public class ExternalResourcePack {
     }
 
     public static void injectExternalResources() {
+        // For now, this is how to avoid double loading
+        // Until External and Flattened are turned into a library, this is required
+        // to avoid CITNBT doubling up.
+        if (Loader.isModLoaded("citnbt"))
+            return;
         File resourceDir = new File(Minecraft.getMinecraft().gameDir, "resources");
         IResourcePack flatPack = new FlattenedResourcePack(resourceDir);
 
