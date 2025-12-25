@@ -49,7 +49,7 @@ Object type follows the format
 | output_count | false    | 1       | 1-64                               | The amount the output will create                       |
 | type         | false    | NONE    | NONE, STAR, BOX                    | What pattern the output craft will be.                  |
 
-A full item might look as follows:
+A full item might look as follows, which generates `example_seeds`, `example_essence`, and the crop.
 
 ```json5
 {
@@ -93,6 +93,16 @@ Optionally a lang file can also be added with the entry. It is HIGHLY recommende
 MACE only sets the translation key.
 
 - `resources/mysticalagriculture/lang/<locale>.lang`
+
+#### Adding Agricraft support
+
+Adding the support of agricraft is incredibly easy.
+
+1. Add `<name>_plant.json` to `config/agricraft/json/defaults/mod_mysticalagriculture`. I recommend copying one that
+already exists.
+2. Modify `<name>_plant.json` to use the name you set in the config.
+3. Point towards a texture that exists. If `enable_default_texture` is true,
+`mysticalagriculture:default_<seeds|essence|crop>` can be used instead.
 
 ## What does this not add
 
