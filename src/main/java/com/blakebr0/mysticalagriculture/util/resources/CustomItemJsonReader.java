@@ -96,6 +96,8 @@ public class CustomItemJsonReader {
             }
             if (item.output_count <= 0) {
                 item.output_count = 1;
+            } else if (item.output_count > 64) {
+                item.output_count = 64;
             }
             return item;
         }
