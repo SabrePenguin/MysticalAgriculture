@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import com.blakebr0.cucumber.helper.RecipeHelper;
+import com.blakebr0.mysticalagriculture.MysticalAgriculture;
 import com.blakebr0.mysticalagriculture.items.custom.CustomItem;
 import com.blakebr0.mysticalagriculture.items.custom.CustomItems;
 import com.blakebr0.mysticalagriculture.items.custom.CustomRecipeType;
@@ -28,24 +29,47 @@ public class CustomRecipes {
     public static void init() {
         for (CustomItem item : CustomItems.getCustomItems()) {
             if (item.input() != null) {
-                Item i = ForgeRegistries.ITEMS.getValue(new ResourceLocation(item.input()));
+                String[] itemStack = item.input().split("#", 2);
+                Item i = ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemStack[0]));
                 if (i != null) {
-                    ItemStack stack = new ItemStack(i);
-                    addSeedRecipe(item, stack);
+                    try {
+                        ItemStack stack = itemStack.length == 1 ? new ItemStack(i) :
+                                new ItemStack(i, 1, Integer.parseInt(itemStack[1]));
+                        addSeedRecipe(item, stack);
+                    } catch (NumberFormatException error) {
+                        MysticalAgriculture.LOGGER.error("Unable to use metadata \"{}\" on item \"{}\"", itemStack[1],
+                                itemStack[0]);
+                    }
                 }
             }
             if (item.type() == CustomRecipeType.BOX) {
-                Item o = ForgeRegistries.ITEMS.getValue(new ResourceLocation(item.output()));
+                String[] itemStack = item.output().split("#", 2);
+                Item o = ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemStack[0]));
                 if (o != null) {
-                    EssenceRecipes.addEssenceRecipe(new ItemStack(o, item.outputCount()),
-                            "EEE", "E E", "EEE", 'E', new ItemStack(item.crop(), 1));
+                    try {
+                        ItemStack stack = itemStack.length == 1 ? new ItemStack(o, item.outputCount()) :
+                                new ItemStack(o, item.outputCount(), Integer.parseInt(itemStack[1]));
+                        EssenceRecipes.addEssenceRecipe(stack,
+                                "EEE", "E E", "EEE", 'E', new ItemStack(item.crop(), 1));
+                    } catch (NumberFormatException error) {
+                        MysticalAgriculture.LOGGER.error("Unable to use metadata \"{}\" on item \"{}\"", itemStack[1],
+                                itemStack[0]);
+                    }
                 }
             }
             if (item.type() == CustomRecipeType.CROSS) {
-                Item o = ForgeRegistries.ITEMS.getValue(new ResourceLocation(item.output()));
+                String[] itemStack = item.output().split("#", 2);
+                Item o = ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemStack[0]));
                 if (o != null) {
-                    EssenceRecipes.addEssenceRecipe(new ItemStack(o, item.outputCount()),
-                            " E ", "EEE", " E ", 'E', new ItemStack(item.crop(), 1));
+                    try {
+                        ItemStack stack = itemStack.length == 1 ? new ItemStack(o, item.outputCount()) :
+                                new ItemStack(o, item.outputCount(), Integer.parseInt(itemStack[1]));
+                        EssenceRecipes.addEssenceRecipe(stack,
+                                " E ", "EEE", " E ", 'E', new ItemStack(item.crop(), 1));
+                    } catch (NumberFormatException error) {
+                        MysticalAgriculture.LOGGER.error("Unable to use metadata \"{}\" on item \"{}\"", itemStack[1],
+                                itemStack[0]);
+                    }
                 }
             }
         }
