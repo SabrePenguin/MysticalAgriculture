@@ -1,4 +1,4 @@
-# Mystical Agriculture Community Edition
+# Mystical Agriculture
 
 Adds Resource Crops, Armor, Tools, and other cool things!
 
@@ -75,7 +75,7 @@ these textures.
 
 ##### Setting textures
 
-MACE follows standard minecraft resource rules, just in the `.minecraft/resources` folder instead of `assets`.
+MA follows standard minecraft resource rules, just in the `.minecraft/resources` folder instead of `assets`.
 Simply put, a custom seed needs the following files:
 
 - `resources/mysticalagriculture/blockstates/<name>_crop.json`
@@ -90,7 +90,7 @@ Simply put, a custom seed needs the following files:
 *The textures files can theoretically be anywhere under the `textures` folder, so long as the json indicates as such.
 
 Optionally a lang file can also be added with the entry. It is HIGHLY recommended to add this, as
-MACE only sets the translation key.
+MA only sets the translation key.
 
 - `resources/mysticalagriculture/lang/<locale>.lang`
 
