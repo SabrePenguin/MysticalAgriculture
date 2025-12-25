@@ -145,8 +145,7 @@ public class ModConfig {
                 "Should custom seeds be enabled?");
         confEnableDefaultSeedTexture = config.getBoolean("enable_default_texture", category, false,
                 "Should the default custom seed texture be enabled?\nThis will prevent missing textures, but generates null items. Useful for " +
-                "creating and testing new seeds before making textures."
-        );
+                        "creating and testing new seeds before making textures.");
 
         category = "Seeds";
         config.addCustomCategoryComment(category, "Enable/Disable seeds individually." + "\n0: Disable the seed." +

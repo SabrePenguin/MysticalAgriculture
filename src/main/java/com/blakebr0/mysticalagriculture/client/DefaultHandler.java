@@ -1,6 +1,5 @@
 package com.blakebr0.mysticalagriculture.client;
 
-import com.blakebr0.mysticalagriculture.config.ModConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.state.IBlockState;
@@ -14,6 +13,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 import com.blakebr0.mysticalagriculture.MysticalAgriculture;
+import com.blakebr0.mysticalagriculture.config.ModConfig;
 import com.blakebr0.mysticalagriculture.items.custom.CustomItem;
 import com.blakebr0.mysticalagriculture.items.custom.CustomItems;
 

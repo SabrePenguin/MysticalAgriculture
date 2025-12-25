@@ -2,6 +2,9 @@ package com.blakebr0.mysticalagriculture.items.custom;
 
 import java.util.*;
 
+import net.minecraft.block.BlockCrops;
+import net.minecraft.item.Item;
+
 import com.blakebr0.cucumber.item.ItemBase;
 import com.blakebr0.cucumber.registry.ModRegistry;
 import com.blakebr0.mysticalagriculture.MysticalAgriculture;
@@ -9,8 +12,6 @@ import com.blakebr0.mysticalagriculture.blocks.crop.BlockMysticalCrop;
 import com.blakebr0.mysticalagriculture.config.ModConfig;
 import com.blakebr0.mysticalagriculture.items.ItemSeed;
 import com.blakebr0.mysticalagriculture.util.resources.CustomItemJsonReader;
-import net.minecraft.block.BlockCrops;
-import net.minecraft.item.Item;
 
 public class CustomItems {
 
