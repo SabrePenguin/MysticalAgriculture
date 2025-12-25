@@ -18,6 +18,7 @@ import com.blakebr0.mysticalagriculture.MysticalAgriculture;
 import com.blakebr0.mysticalagriculture.blocks.ModBlocks;
 import com.blakebr0.mysticalagriculture.config.EssenceConfig;
 import com.blakebr0.mysticalagriculture.config.ModConfig;
+import com.blakebr0.mysticalagriculture.crafting.CustomRecipes;
 import com.blakebr0.mysticalagriculture.crafting.EssenceRecipes;
 import com.blakebr0.mysticalagriculture.crafting.ModRecipes;
 import com.blakebr0.mysticalagriculture.crafting.ReprocessorManager;
@@ -28,6 +29,7 @@ import com.blakebr0.mysticalagriculture.items.ModItems;
 import com.blakebr0.mysticalagriculture.items.armor.ItemIntermediumArmor;
 import com.blakebr0.mysticalagriculture.items.armor.ItemSuperiumArmor;
 import com.blakebr0.mysticalagriculture.items.armor.ItemSupremiumArmor;
+import com.blakebr0.mysticalagriculture.items.custom.CustomItems;
 import com.blakebr0.mysticalagriculture.lib.CropType;
 import com.blakebr0.mysticalagriculture.lib.Parts;
 import com.blakebr0.mysticalagriculture.tileentity.ModTileEntities;
@@ -52,6 +54,7 @@ public class CommonProxy {
         ModBlocks.init();
         ModItems.init();
         ModEntities.init();
+        CustomItems.init();
 
         MinecraftForge.EVENT_BUS.register(MysticalAgriculture.REGISTRY);
 
@@ -110,5 +113,6 @@ public class CommonProxy {
         Parts.getParts();
         ModRecipes.initRecipes();
         EssenceRecipes.init();
+        CustomRecipes.init();
     }
 }

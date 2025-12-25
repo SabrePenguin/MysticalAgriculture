@@ -8,6 +8,9 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.blakebr0.cucumber.registry.ModRegistry;
 import com.blakebr0.mysticalagriculture.proxy.CommonProxy;
 
@@ -25,6 +28,8 @@ public class MysticalAgriculture {
 
     public static final CreativeTabs CREATIVE_TAB = new MACreativeTab();
     public static final ModRegistry REGISTRY = ModRegistry.create(MOD_ID);
+
+    public static final Logger LOGGER = LogManager.getLogger(NAME);
 
     @Mod.Instance(MysticalAgriculture.MOD_ID)
     public static MysticalAgriculture INSTANCE;
