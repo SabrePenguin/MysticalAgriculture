@@ -40,16 +40,18 @@ or
 
 Object type follows the format
 
-| field        | required | default | values                             | description                                             |
-|--------------|----------|---------|------------------------------------|---------------------------------------------------------|
-| name         | true     |         | [a-z,0-9,.,-,_,/]                  | The produced item name. Follows path rules.             |
-| tier         | false    | 1       | 1-5                                | The desired item tier.                                  |
-| input_item   | false    |         | \<namespace>:\<item>[#\<metadata>] | The item to put in the four corners as a default recipe |
-| output_item  | false    |         | \<namespace>:\<item>[#\<metadata>] | The item that the essence produces                      |
-| output_count | false    | 1       | 1-64                               | The amount the output will create                       |
-| type         | false    | NONE    | NONE, STAR, BOX                    | What pattern the output craft will be.                  |
+| field        | required | default | values                              | description                                                     |
+|--------------|----------|---------|-------------------------------------|-----------------------------------------------------------------|
+| name         | true     |         | [a-z,0-9,.,-,_,/]                   | The produced item name. Follows path rules.                     |
+| tier         | false    | 1       | 1-MAXINT                            | The desired item tier. 1-5 support auto-generated seed recipes. |
+| input_item   | false    |         | \<namespace>:\<item>[#\<metadata>]  | The item to put in the four corners as a default recipe         |
+| output_item  | false    |         | \<namespace>:\<item>[#\<metadata>]  | The item that the essence produces                              |
+| output_count | false    | 1       | 1-64                                | The amount the output will create                               |
+| type         | false    | NONE    | NONE, STAR, BOX                     | What pattern the output craft will be.                          |
+| crux         | false    |         | \<namespace>:\<block>[#\<metadata>] | The crux block needed for the crop to grow.                     |
 
-A full item might look as follows, which generates `example_seeds`, `example_essence`, and the crop.
+A full item might look as follows, which generates `example_seeds`, `example_essence`, and the crop. This
+would require a crux of soulstone underneath.
 
 ```json5
 {
@@ -58,7 +60,8 @@ A full item might look as follows, which generates `example_seeds`, `example_ess
   "input_item": "mysticalagriculture:ingot_storage#2",
   "output_item": "mysticalagriculture:soulstone",
   "output_count": 64,
-  "type": "STAR"
+  "type": "STAR",
+  "crux": "mysticalagriculture:soulstone"
 }
 ```
 
