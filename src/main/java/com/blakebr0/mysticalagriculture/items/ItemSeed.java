@@ -60,6 +60,11 @@ public class ItemSeed extends ItemSeeds {
             case 4:
                 tooltip.add(Tooltips.TIER + Colors.RED + "5");
                 break;
+            case 5:
+                tooltip.add(Tooltips.TIER + Colors.DARK_PURPLE + this.tier);
+                break;
+            default:
+                tooltip.add(Tooltips.TIER + Colors.YELLOW + this.tier);
         }
     }
 }

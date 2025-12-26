@@ -28,7 +28,7 @@ public class CustomRecipes {
 
     public static void init() {
         for (CustomItem item : CustomItems.getCustomItems()) {
-            if (item.input() != null) {
+            if (item.input() != null && item.tier() >= 1 && item.tier() <= 6) {
                 String[] itemStack = item.input().split("#", 2);
                 Item i = ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemStack[0]));
                 if (i != null) {
