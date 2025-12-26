@@ -100,6 +100,9 @@ public class CustomItemJsonReader {
             } else if (item.output_count > 64) {
                 item.output_count = 64;
             }
+            if (item.tier < 1) {
+                item.tier = 1;
+            }
             if (item.crux != null && item.crux.isEmpty()) {
                 item.crux = null;
             }
