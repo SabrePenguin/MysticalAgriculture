@@ -64,6 +64,7 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent e) {
+        CustomItems.registerCruxes();
         FMLInterModComms.sendMessage("waila", "register",
                 "com.blakebr0.mysticalagriculture.compat.WailaDataProvider.callbackRegister");
 
