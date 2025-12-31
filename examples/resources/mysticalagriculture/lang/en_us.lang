@@ -1,0 +1,9 @@
+# Custom Seeds and Essences
+item.ma.placeholder_essence.name=Placeholder Essence
+item.ma.placeholder_seed.name=Placeholder Seeds
+# Unused, but shows multiple can be added
+tile.ma.not_an_actual_essence.name=This text is not used
+tile.ma.not_an_actual_seed.name=This text is not used
+
+# Custom Plants
+tile.ma.placeholder_crop.name=Placeholder Crop

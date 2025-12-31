@@ -1,0 +1,7 @@
+{
+  "name": "placeholder",
+  "input_item": "mysticalagriculture:ingot_storage#3",
+  "output_item": "mysticalagriculture:ingot_storage#b4",
+  "tier": 3,
+  "type": "BOX"
+}
