@@ -15,12 +15,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.blakebr0.mysticalagriculture.blocks.BlockBase;
 import com.blakebr0.mysticalagriculture.blocks.ModBlocks;
 import com.blakebr0.mysticalagriculture.items.ModItems;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockInferiumOre extends BlockBase {
 

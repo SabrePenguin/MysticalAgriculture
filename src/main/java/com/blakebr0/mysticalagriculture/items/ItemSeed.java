@@ -67,7 +67,7 @@ public class ItemSeed extends ItemSeeds {
                 if (this.tier - 7 < ModConfig.confTierColors.length) {
                     String[] color = convertToColor(ModConfig.confTierColors[this.tier - 7].split(","));
                     if (isValidColor(color)) {
-                        tooltip.add(Tooltips.TIER + String.join("",color) + this.tier);
+                        tooltip.add(Tooltips.TIER + String.join("", color) + this.tier);
                     }
                 } else {
                     tooltip.add(Tooltips.TIER + Colors.WHITE + this.tier);
@@ -88,7 +88,7 @@ public class ItemSeed extends ItemSeeds {
 
     private boolean isValidColor(String[] input) {
         if (input == null) return false;
-        for (String color: input) {
+        for (String color : input) {
             if (color == null) return false;
             if (color.length() != 2) return false;
             if (!color.startsWith("§")) return false;

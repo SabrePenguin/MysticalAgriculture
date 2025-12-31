@@ -151,7 +151,7 @@ public class ModConfig {
         confEnableDefaultSeedTexture = config.getBoolean("enable_default_texture", category, false,
                 "Should the default custom seed texture be enabled?\nThis will prevent missing textures, but generates null items. Useful for " +
                         "creating and testing new seeds before making textures.");
-        confTierColors = config.getStringList("tier_colors", category, new String[]{},
+        confTierColors = config.getStringList("tier_colors", category, new String[] {},
                 """
                         Sets the pre-existing color of the given tier in numerical order. Custom tier colors start at 7.
                         Only valid text minecraft text formats will work. (ie. §5, §e, §m).
