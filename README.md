@@ -1,10 +1,10 @@
-# Mystical Agriculture
+# Mystical Agriculture Community Edition
 
 Adds Resource Crops, Armor, Tools, and other cool things!
 
 ## What does this add?
 
-This fork primarily adds the capability to generate plants and
+Mace adds the ability to generate plants and
 resources dynamically.
 
 ### Creating custom plants:
@@ -78,7 +78,7 @@ these textures.
 
 ##### Setting textures
 
-MA follows standard minecraft resource rules, just in the `.minecraft/resources` folder instead of `assets`.
+Mace follows standard minecraft resource rules, just in the `.minecraft/resources` folder instead of `assets`.
 Simply put, a custom seed needs the following files:
 
 - `resources/mysticalagriculture/blockstates/<name>_crop.json`
@@ -109,7 +109,7 @@ already exists.
 
 ## What does this not add
 
-Tier 6 crops.
+Anything specific to Mystical Aggraditions.
 
 ## Original Project:
 [![](http://cf.way2muchnoise.eu/full_246640_downloads.svg)](https://minecraft.curseforge.com/projects/mystical-agriculture) [![](http://cf.way2muchnoise.eu/versions/246640.svg)](https://minecraft.curseforge.com/projects/mystical-agriculture)
