@@ -29,6 +29,7 @@ import com.blakebr0.mysticalagriculture.items.ModItems;
 import com.blakebr0.mysticalagriculture.items.armor.ItemIntermediumArmor;
 import com.blakebr0.mysticalagriculture.items.armor.ItemSuperiumArmor;
 import com.blakebr0.mysticalagriculture.items.armor.ItemSupremiumArmor;
+import com.blakebr0.mysticalagriculture.items.custom.CustomItem;
 import com.blakebr0.mysticalagriculture.items.custom.CustomItems;
 import com.blakebr0.mysticalagriculture.lib.CropType;
 import com.blakebr0.mysticalagriculture.lib.Parts;
@@ -87,6 +88,10 @@ public class CommonProxy {
             if (type.isEnabled()) {
                 ReprocessorManager.addRecipe(new ItemStack(type.getCrop(), 2, 0), new ItemStack(type.getSeed(), 1, 0));
             }
+        }
+
+        for (CustomItem item : CustomItems.getCustomItems()) {
+            ReprocessorManager.addRecipe(new ItemStack(item.crop(), 2), new ItemStack(item.seed(), 1));
         }
 
         NetworkRegistry.INSTANCE.registerGuiHandler(MysticalAgriculture.INSTANCE, new GuiHandler());
