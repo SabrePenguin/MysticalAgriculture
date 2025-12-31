@@ -154,6 +154,7 @@ public class ModConfig {
         confTierColors = config.getStringList("tier_colors", category, new String[]{},
                 """
                         Sets the pre-existing color of the given tier in numerical order. Custom tier colors start at 7.
+                        Only valid text minecraft text formats will work. (ie. §5, §e, §m).
                         ie.
                         e,m,o
                         f
