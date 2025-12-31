@@ -18,6 +18,8 @@ import net.minecraft.world.World;
 
 import com.blakebr0.cucumber.block.BlockBase;
 import com.blakebr0.mysticalagriculture.MysticalAgriculture;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockMachineFrame extends BlockBase {
 
@@ -54,6 +56,7 @@ public class BlockMachineFrame extends BlockBase {
 
     @Nonnull
     @Override
+    @SideOnly(Side.CLIENT)
     public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }

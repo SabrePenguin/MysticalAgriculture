@@ -56,6 +56,7 @@ public class BlockWitherproofGlass extends BlockGlass implements IEnableable {
 
     @Override
     @Nonnull
+    @SideOnly(Side.CLIENT)
     public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.TRANSLUCENT;
     }

@@ -86,6 +86,7 @@ public class BlockTinkeringTable extends BlockBase implements ITileEntityProvide
 
     @Override
     @Nonnull
+    @SideOnly(Side.CLIENT)
     public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
