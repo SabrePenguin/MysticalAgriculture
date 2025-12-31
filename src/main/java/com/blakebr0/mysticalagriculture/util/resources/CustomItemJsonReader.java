@@ -74,6 +74,7 @@ public class CustomItemJsonReader {
         public String output_item;
         public int output_count;
         public CustomRecipeType type;
+        public String crux;
 
         public CustomItemHolder() {
             this.type = CustomRecipeType.NONE;
@@ -98,6 +99,12 @@ public class CustomItemJsonReader {
                 item.output_count = 1;
             } else if (item.output_count > 64) {
                 item.output_count = 64;
+            }
+            if (item.tier < 1) {
+                item.tier = 1;
+            }
+            if (item.crux != null && item.crux.isEmpty()) {
+                item.crux = null;
             }
             return item;
         }

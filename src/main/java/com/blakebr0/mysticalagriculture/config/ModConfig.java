@@ -31,8 +31,10 @@ public class ModConfig {
     public static boolean confMysticalFertilizer;
     public static boolean confSeedReprocessor;
     public static boolean confGenericOreDictEssence;
+
     public static boolean confEnableCustomSeeds;
     public static boolean confEnableDefaultSeedTexture;
+    public static String[] confTierColors;
 
     public static boolean confGearModuleOverride;
     public static boolean confSupremiumFlight;
@@ -141,11 +143,24 @@ public class ModConfig {
                 "Should the Seed Reprocessor be enabled?");
         confGenericOreDictEssence = config.getBoolean("generic_ore_dict_essence", category, true,
                 "Should the resource essences/seeds be added to the OreDictionary as essenceTier1, seedsTier1, etc.?");
+
+        category = "Custom Content";
+        config.addCustomCategoryComment(category, "Settings for custom Mystical Agriculture content.");
         confEnableCustomSeeds = config.getBoolean("enable_custom_seeds", category, true,
                 "Should custom seeds be enabled?");
         confEnableDefaultSeedTexture = config.getBoolean("enable_default_texture", category, false,
                 "Should the default custom seed texture be enabled?\nThis will prevent missing textures, but generates null items. Useful for " +
                         "creating and testing new seeds before making textures.");
+        confTierColors = config.getStringList("tier_colors", category, new String[]{},
+                """
+                        Sets the pre-existing color of the given tier in numerical order. Custom tier colors start at 7.
+                        Only valid text minecraft text formats will work. (ie. §5, §e, §m).
+                        ie.
+                        e,m,o
+                        f
+                        3
+                        would be for tiers 7, 8, and 9
+                        """);
 
         category = "Seeds";
         config.addCustomCategoryComment(category, "Enable/Disable seeds individually." + "\n0: Disable the seed." +

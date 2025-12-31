@@ -60,6 +60,39 @@ public class ItemSeed extends ItemSeeds {
             case 4:
                 tooltip.add(Tooltips.TIER + Colors.RED + "5");
                 break;
+            case 5:
+                tooltip.add(Tooltips.TIER + Colors.DARK_PURPLE + this.tier);
+                break;
+            default:
+                if (this.tier - 7 < ModConfig.confTierColors.length) {
+                    String[] color = convertToColor(ModConfig.confTierColors[this.tier - 7].split(","));
+                    if (isValidColor(color)) {
+                        tooltip.add(Tooltips.TIER + String.join("",color) + this.tier);
+                    }
+                } else {
+                    tooltip.add(Tooltips.TIER + Colors.WHITE + this.tier);
+                }
         }
+    }
+
+    private String[] convertToColor(String[] input) {
+        for (int i = 0; i < input.length; i++) {
+            String color = input[i];
+            if (color == null) return null;
+            if (color.length() == 1 && !color.startsWith("§")) {
+                input[i] = "§" + color;
+            }
+        }
+        return input;
+    }
+
+    private boolean isValidColor(String[] input) {
+        if (input == null) return false;
+        for (String color: input) {
+            if (color == null) return false;
+            if (color.length() != 2) return false;
+            if (!color.startsWith("§")) return false;
+        }
+        return true;
     }
 }
