@@ -1,7 +1,7 @@
 [
 {
   "modid": "mysticalagriculture",
-  "name": "Mystical Agriculture",
+  "name": "${modname}",
   "description": "Adds Resource Crops, Armor, Tools, and other fun stuff!",
   "version": "${version}",
   "mcversion": "${mcversion}",
