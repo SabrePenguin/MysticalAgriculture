@@ -4,26 +4,24 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Locale;
 
-import com.google.gson.GsonBuilder;
 import net.minecraftforge.fml.common.Loader;
 
 import com.blakebr0.mysticalagriculture.MysticalAgriculture;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 public class JsonWriter {
 
-	public static final Gson GSON;
-	static {
-		GsonBuilder builder = new GsonBuilder();
-		builder.setPrettyPrinting();
-		GSON = builder.create();
-	}
+    public static final Gson GSON;
+    static {
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        GSON = builder.create();
+    }
 
     public static void writeNewAgricraftJson(String cropName, String cruxName) {
         File resource_dir = new File(Loader.instance().getConfigDir(),
@@ -40,9 +38,9 @@ public class JsonWriter {
             MysticalAgriculture.LOGGER.error("{} is not a directory", resource_dir);
             return;
         }
-		if (new File(resource_dir, cropName + "_plant.json").exists())
-			return;
-        try (Writer writer = new FileWriter(new File(resource_dir,cropName + "_plant.json"))) {
+        if (new File(resource_dir, cropName + "_plant.json").exists())
+            return;
+        try (Writer writer = new FileWriter(new File(resource_dir, cropName + "_plant.json"))) {
             GSON.toJson(createJson(cropName, cruxName), writer);
         } catch (IOException exception) {
             MysticalAgriculture.LOGGER.error("Unable to write to file {}/{}", resource_dir, "");
@@ -145,7 +143,7 @@ public class JsonWriter {
                 condition.addProperty("ignoreMeta", ignoreMeta);
                 condition.add("ignoreTags", new JsonArray());
                 condition.addProperty("useOreDict", false);
-				conditions.add(condition);
+                conditions.add(condition);
             }
             requirement.add("conditions", conditions);
             object.add("requirement", requirement);
@@ -164,7 +162,7 @@ public class JsonWriter {
             plant_textures.add("mysticalagriculture:blocks/crop4");
             plant_textures.add("mysticalagriculture:blocks/" + name + "_crop");
             texture.add("plant_textures", plant_textures);
-			object.add("texture", texture);
+            object.add("texture", texture);
         }
         return object;
     }
