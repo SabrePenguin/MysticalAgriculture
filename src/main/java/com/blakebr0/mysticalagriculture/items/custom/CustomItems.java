@@ -7,6 +7,7 @@ import net.minecraft.block.BlockCrops;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import com.blakebr0.cucumber.item.ItemBase;
@@ -16,6 +17,7 @@ import com.blakebr0.mysticalagriculture.blocks.crop.BlockCruxMysticalCrop;
 import com.blakebr0.mysticalagriculture.blocks.crop.BlockMysticalCrop;
 import com.blakebr0.mysticalagriculture.config.ModConfig;
 import com.blakebr0.mysticalagriculture.items.ItemSeed;
+import com.blakebr0.mysticalagriculture.util.JsonWriter;
 import com.blakebr0.mysticalagriculture.util.resources.CustomItemJsonReader;
 import com.github.bsideup.jabel.Desugar;
 
@@ -69,6 +71,9 @@ public class CustomItems {
                 // Equivalent to set()
                 blockCrop.setCrop(crop);
                 blockCrop.setSeed(seed);
+                if (ModConfig.confGenerateAgricraftConfigs && Loader.isModLoaded("agricraft")) {
+                    JsonWriter.writeNewAgricraftJson(item.name, item.crux);
+                }
             }
         }
     }

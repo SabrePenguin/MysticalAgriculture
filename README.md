@@ -101,6 +101,13 @@ MA only sets the translation key.
 
 Adding the support of agricraft is incredibly easy.
 
+##### Automatic
+
+Agricraft support is now even easier. Simply ensure `generate_agricraft_generation` is true. This will generate
+a new json for all seeds, filling it out with cruxes and items.
+
+##### Manual
+
 1. Add `<name>_plant.json` to `config/agricraft/json/defaults/mod_mysticalagriculture`. I recommend copying one that
 already exists.
 2. Modify `<name>_plant.json` to use the name you set in the config.
@@ -109,7 +116,9 @@ already exists.
 
 ## What does this not add
 
-Anything specific to Mystical Aggraditions.
+Anything specific to Mystical Agradditions.
 
-## Original Project:
+## Credit:
+
+Original project
 [![](http://cf.way2muchnoise.eu/full_246640_downloads.svg)](https://minecraft.curseforge.com/projects/mystical-agriculture) [![](http://cf.way2muchnoise.eu/versions/246640.svg)](https://minecraft.curseforge.com/projects/mystical-agriculture)

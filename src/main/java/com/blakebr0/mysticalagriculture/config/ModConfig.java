@@ -35,6 +35,7 @@ public class ModConfig {
     public static boolean confEnableCustomSeeds;
     public static boolean confEnableDefaultSeedTexture;
     public static String[] confTierColors;
+    public static boolean confGenerateAgricraftConfigs;
 
     public static boolean confGearModuleOverride;
     public static boolean confSupremiumFlight;
@@ -161,6 +162,10 @@ public class ModConfig {
                         3
                         would be for tiers 7, 8, and 9
                         """);
+        confGenerateAgricraftConfigs = config.getBoolean("generate_agricraft_json", category, true, """
+                Should agricraft configs for custom seeds be generated?
+                Will not generate if agricraft is not loaded.
+                """);
 
         category = "Seeds";
         config.addCustomCategoryComment(category, "Enable/Disable seeds individually." + "\n0: Disable the seed." +
