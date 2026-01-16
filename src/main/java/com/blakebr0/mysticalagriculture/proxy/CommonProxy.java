@@ -2,7 +2,6 @@ package com.blakebr0.mysticalagriculture.proxy;
 
 import java.io.File;
 
-import com.blakebr0.mysticalagriculture.items.ItemSeed;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.MinecraftForge;
@@ -26,6 +25,7 @@ import com.blakebr0.mysticalagriculture.crafting.ReprocessorManager;
 import com.blakebr0.mysticalagriculture.entity.ModEntities;
 import com.blakebr0.mysticalagriculture.handler.GuiHandler;
 import com.blakebr0.mysticalagriculture.handler.MobDrops;
+import com.blakebr0.mysticalagriculture.items.ItemSeed;
 import com.blakebr0.mysticalagriculture.items.ModItems;
 import com.blakebr0.mysticalagriculture.items.armor.ItemIntermediumArmor;
 import com.blakebr0.mysticalagriculture.items.armor.ItemSuperiumArmor;
@@ -94,9 +94,10 @@ public class CommonProxy {
         for (CustomItem item : CustomItems.getCustomItems()) {
             ReprocessorManager.addRecipe(new ItemStack(item.crop(), 2), new ItemStack(item.seed(), 1));
         }
-		for (ItemSeed item: CustomItems.stagedInferiumItems) {
-			ReprocessorManager.addRecipe(new ItemStack(ModItems.itemCrafting, item.getTier(), 0), new ItemStack(item, 1));
-		}
+        for (ItemSeed item : CustomItems.stagedInferiumItems) {
+            ReprocessorManager.addRecipe(new ItemStack(ModItems.itemCrafting, item.getTier(), 0),
+                    new ItemStack(item, 1));
+        }
 
         NetworkRegistry.INSTANCE.registerGuiHandler(MysticalAgriculture.INSTANCE, new GuiHandler());
 

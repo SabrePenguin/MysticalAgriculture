@@ -23,9 +23,9 @@ public class JsonWriter {
         GSON = builder.create();
     }
 
-	public static void writeNewAgricraftJson(String cropName, String cruxName) {
-		writeNewAgricraftJson(cropName, cropName + "_essence", cruxName);
-	}
+    public static void writeNewAgricraftJson(String cropName, String cruxName) {
+        writeNewAgricraftJson(cropName, cropName + "_essence", cruxName);
+    }
 
     public static void writeNewAgricraftJson(String cropName, String essenceName, String cruxName) {
         File resource_dir = new File(Loader.instance().getConfigDir(),
@@ -174,11 +174,11 @@ public class JsonWriter {
     private static String capitalize(String name) {
         if (name == null || name.isEmpty())
             return "";
-		String[] n = name.split("_");
-		StringBuilder builder = new StringBuilder();
-		for (String split: n) {
-			builder.append(split.substring(0, 1).toUpperCase(Locale.ROOT)).append(split.substring(1)).append(' ');
-		}
+        String[] n = name.split("_");
+        StringBuilder builder = new StringBuilder();
+        for (String split : n) {
+            builder.append(split.substring(0, 1).toUpperCase(Locale.ROOT)).append(split.substring(1)).append(' ');
+        }
         return builder.toString().trim();
     }
 }
