@@ -5,7 +5,7 @@ Adds Resource Crops, Armor, Tools, and other cool things!
 ## What does this add?
 
 Mace adds the ability to generate plants and
-resources dynamically.
+resources dynamically. It also adds extra tiers of inferium seeds.
 
 ### Creating custom plants:
 
