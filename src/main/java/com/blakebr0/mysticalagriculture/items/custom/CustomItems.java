@@ -14,6 +14,7 @@ import com.blakebr0.cucumber.item.ItemBase;
 import com.blakebr0.cucumber.registry.ModRegistry;
 import com.blakebr0.mysticalagriculture.MysticalAgriculture;
 import com.blakebr0.mysticalagriculture.blocks.crop.BlockCruxMysticalCrop;
+import com.blakebr0.mysticalagriculture.blocks.crop.BlockInferiumCrop;
 import com.blakebr0.mysticalagriculture.blocks.crop.BlockMysticalCrop;
 import com.blakebr0.mysticalagriculture.config.ModConfig;
 import com.blakebr0.mysticalagriculture.items.ItemSeed;
@@ -25,6 +26,8 @@ public class CustomItems {
 
     private static final Set<CustomItem> customItems = new HashSet<>();
     public static List<Pair<String, BlockCruxMysticalCrop>> staging = new ArrayList<>();
+    public static List<Block> stagedInferiumBlocks = new ArrayList<>();
+    public static List<ItemSeed> stagedInferiumItems = new ArrayList<>();
 
     public static Set<CustomItem> getCustomItems() {
         return customItems;
@@ -32,8 +35,28 @@ public class CustomItems {
 
     public static void init() {
         if (ModConfig.confEnableCustomSeeds) {
+            final ModRegistry registry = MysticalAgriculture.REGISTRY;
+            for (int i = 0; i < ModConfig.confInferiumSeedGeneration.length; i++) {
+                if (ModConfig.confInferiumSeedGeneration[i]) {
+                    int tier = i + 7;
+                    BlockInferiumCrop crop = new BlockInferiumCrop("tier" + tier + "_inferium_crop", tier);
+                    registry.register(crop, "tier" + tier + "_inferium_crop");
+                    ItemSeed seeds = new ItemSeed("tier" + tier + "_inferium_seeds",
+                            crop, tier);
+                    seeds.setTranslationKey("ma.tier1_inferium_seeds");
+                    registry.register(seeds, "tier" + tier + "_inferium_seeds");
+                    crop.setSeed(seeds);
+                    if (ModConfig.confGenericOreDictEssence) {
+                        registry.addOre(seeds, "seedsTier" + tier);
+                    }
+                    stagedInferiumBlocks.add(crop);
+                    stagedInferiumItems.add(seeds);
+					if (ModConfig.confGenerateAgricraftConfigs && Loader.isModLoaded("agricraft")) {
+						JsonWriter.writeNewAgricraftJson("tier" + tier + "_inferium", "crafting", null);
+					}
+                }
+            }
             if (ModConfig.confEnableDefaultSeedTexture) {
-                final ModRegistry registry = MysticalAgriculture.REGISTRY;
 
                 BlockCrops blockCrop = new BlockMysticalCrop("default_crop");
                 registry.register(blockCrop, "default_crop");
@@ -48,7 +71,6 @@ public class CustomItems {
 
             Set<CustomItemJsonReader.CustomItemHolder> itemHolderSet = CustomItemJsonReader.loadResources();
             for (CustomItemJsonReader.CustomItemHolder item : itemHolderSet) {
-                final ModRegistry registry = MysticalAgriculture.REGISTRY;
                 BlockMysticalCrop blockCrop = setupCrop(item.name + "_crop", item.crux);
                 registry.register(blockCrop, item.name + "_crop");
 
@@ -94,6 +116,7 @@ public class CustomItems {
                 pair.two.setRoot(airState);
             }
         }
+        staging.clear();
     }
 
     private static BlockMysticalCrop setupCrop(String name, String crux) {

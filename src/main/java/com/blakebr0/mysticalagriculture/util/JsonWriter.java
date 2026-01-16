@@ -23,7 +23,11 @@ public class JsonWriter {
         GSON = builder.create();
     }
 
-    public static void writeNewAgricraftJson(String cropName, String cruxName) {
+	public static void writeNewAgricraftJson(String cropName, String cruxName) {
+		writeNewAgricraftJson(cropName, cropName + "_essence", cruxName);
+	}
+
+    public static void writeNewAgricraftJson(String cropName, String essenceName, String cruxName) {
         File resource_dir = new File(Loader.instance().getConfigDir(),
                 "agricraft/json/defaults/mod_mysticalagriculture/plants");
         if (!resource_dir.exists()) {
@@ -41,13 +45,13 @@ public class JsonWriter {
         if (new File(resource_dir, cropName + "_plant.json").exists())
             return;
         try (Writer writer = new FileWriter(new File(resource_dir, cropName + "_plant.json"))) {
-            GSON.toJson(createJson(cropName, cruxName), writer);
+            GSON.toJson(createJson(cropName, essenceName, cruxName), writer);
         } catch (IOException exception) {
             MysticalAgriculture.LOGGER.error("Unable to write to file {}/{}", resource_dir, "");
         }
     }
 
-    private static JsonObject createJson(String name, String cruxName) {
+    private static JsonObject createJson(String name, String essenceName, String cruxName) {
         String capitalizedName = capitalize(name);
         JsonObject object = new JsonObject();
         object.addProperty("path", "mod_mysticalagriculture/plants/" + name + "_plant.json");
@@ -99,7 +103,7 @@ public class JsonWriter {
                 product.addProperty("max", 5);
                 product.addProperty("chance", 0.9);
                 product.addProperty("required", true);
-                product.addProperty("item", "mysticalagriculture:" + name + "_essence");
+                product.addProperty("item", "mysticalagriculture:" + essenceName);
                 product.addProperty("meta", 0);
                 product.addProperty("tags", ""); // Deliberately empty
                 product.addProperty("ignoreMeta", false);
@@ -170,6 +174,11 @@ public class JsonWriter {
     private static String capitalize(String name) {
         if (name == null || name.isEmpty())
             return "";
-        return name.substring(0, 1).toUpperCase(Locale.ROOT) + name.substring(1);
+		String[] n = name.split("_");
+		StringBuilder builder = new StringBuilder();
+		for (String split: n) {
+			builder.append(split.substring(0, 1).toUpperCase(Locale.ROOT)).append(split.substring(1)).append(' ');
+		}
+        return builder.toString().trim();
     }
 }

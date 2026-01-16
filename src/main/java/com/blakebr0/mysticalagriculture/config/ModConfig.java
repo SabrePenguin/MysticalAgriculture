@@ -36,6 +36,7 @@ public class ModConfig {
     public static boolean confEnableDefaultSeedTexture;
     public static String[] confTierColors;
     public static boolean confGenerateAgricraftConfigs;
+    public static boolean[] confInferiumSeedGeneration;
 
     public static boolean confGearModuleOverride;
     public static boolean confSupremiumFlight;
@@ -166,6 +167,36 @@ public class ModConfig {
                 Should agricraft configs for custom seeds be generated?
                 Will not generate if agricraft is not loaded.
                 """);
+        {
+            String[] temp = config.getStringList("inferium_tiers", category, new String[0],
+                    """
+                            Generates tiers of inferium seeds from tier 7+. Values must either be "true" or "false" (default "false").
+                            REQUIRES enable_custom_seeds
+                            ie.
+                            true
+                            false
+                            false
+                            true
+                            Would generate inferium seeds at tier 7, skip 8 and 9, and generate tier 10.
+                            ------
+                            Inferium seeds generate essence at either 0 or 1 greater.
+                            ie.
+                            Tier 1: 1-2
+                            Tier 2: 2-3
+                            Tier 3: 3-4
+                            etc.
+                            """);
+            if (temp.length == Integer.MAX_VALUE - 7) {
+                confInferiumSeedGeneration = new boolean[0];
+                MysticalAgriculture.LOGGER.warn("MAXINT drops has been reached, aborting");
+            } else {
+                boolean[] values = new boolean[temp.length];
+                for (int i = 0; i < temp.length; i++) {
+                    values[i] = Boolean.parseBoolean(temp[i]);
+                }
+                confInferiumSeedGeneration = values;
+            }
+        }
 
         category = "Seeds";
         config.addCustomCategoryComment(category, "Enable/Disable seeds individually." + "\n0: Disable the seed." +
