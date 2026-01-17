@@ -52,7 +52,8 @@ public class CustomItems {
                     stagedInferiumBlocks.add(crop);
                     stagedInferiumItems.add(seeds);
                     if (ModConfig.confGenerateAgricraftConfigs && Loader.isModLoaded("agricraft")) {
-                        JsonWriter.writeNewAgricraftJson("tier" + tier + "_inferium", "crafting", null);
+                        JsonWriter.writeNewAgricraftJson("tier" + tier + "_inferium", "inferium_crop", "crafting",
+                                null);
                     }
                 }
             }

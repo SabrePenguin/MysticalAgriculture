@@ -24,10 +24,10 @@ public class JsonWriter {
     }
 
     public static void writeNewAgricraftJson(String cropName, String cruxName) {
-        writeNewAgricraftJson(cropName, cropName + "_essence", cruxName);
+        writeNewAgricraftJson(cropName, cropName + "_crop", cropName + "_essence", cruxName);
     }
 
-    public static void writeNewAgricraftJson(String cropName, String essenceName, String cruxName) {
+    public static void writeNewAgricraftJson(String name, String cropName, String essenceName, String cruxName) {
         File resource_dir = new File(Loader.instance().getConfigDir(),
                 "agricraft/json/defaults/mod_mysticalagriculture/plants");
         if (!resource_dir.exists()) {
@@ -42,16 +42,16 @@ public class JsonWriter {
             MysticalAgriculture.LOGGER.error("{} is not a directory", resource_dir);
             return;
         }
-        if (new File(resource_dir, cropName + "_plant.json").exists())
+        if (new File(resource_dir, name + "_plant.json").exists())
             return;
-        try (Writer writer = new FileWriter(new File(resource_dir, cropName + "_plant.json"))) {
-            GSON.toJson(createJson(cropName, essenceName, cruxName), writer);
+        try (Writer writer = new FileWriter(new File(resource_dir, name + "_plant.json"))) {
+            GSON.toJson(createJson(name, cropName, essenceName, cruxName), writer);
         } catch (IOException exception) {
             MysticalAgriculture.LOGGER.error("Unable to write to file {}/{}", resource_dir, "");
         }
     }
 
-    private static JsonObject createJson(String name, String essenceName, String cruxName) {
+    private static JsonObject createJson(String name, String cropName, String essenceName, String cruxName) {
         String capitalizedName = capitalize(name);
         JsonObject object = new JsonObject();
         object.addProperty("path", "mod_mysticalagriculture/plants/" + name + "_plant.json");
@@ -164,7 +164,7 @@ public class JsonWriter {
             plant_textures.add("mysticalagriculture:blocks/crop3");
             plant_textures.add("mysticalagriculture:blocks/crop4");
             plant_textures.add("mysticalagriculture:blocks/crop4");
-            plant_textures.add("mysticalagriculture:blocks/" + name + "_crop");
+            plant_textures.add("mysticalagriculture:blocks/" + cropName);
             texture.add("plant_textures", plant_textures);
             object.add("texture", texture);
         }
