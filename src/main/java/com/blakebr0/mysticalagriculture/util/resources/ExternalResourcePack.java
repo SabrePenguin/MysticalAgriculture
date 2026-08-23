@@ -19,6 +19,7 @@ public class ExternalResourcePack {
     private static final File RESOURCE_DIR = new File(Minecraft.getMinecraft().gameDir, "resources");
     private static final File PACK_META = new File(RESOURCE_DIR, "pack.mcmeta");
 
+    @SuppressWarnings("ReadWriteStringCanBeUsed")
     public static boolean ensurePackMcmetaExists() {
         if (!RESOURCE_DIR.exists()) {
             if (!RESOURCE_DIR.mkdir()) {
@@ -42,6 +43,7 @@ public class ExternalResourcePack {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     public static void injectExternalResources() {
         if (ModChecker.RESOURCE_LOADER || Loader.isModLoaded("citnbt")) {
             MysticalAgriculture.LOGGER.info("ResourceLoader detected");
