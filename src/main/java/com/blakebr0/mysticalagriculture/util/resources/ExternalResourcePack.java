@@ -4,13 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.List;
 
+import com.blakebr0.mysticalagriculture.util.ModChecker;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.IResourcePack;
-import net.minecraft.client.resources.SimpleReloadableResourceManager;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
@@ -21,6 +19,7 @@ public class ExternalResourcePack {
     private static final File RESOURCE_DIR = new File(Minecraft.getMinecraft().gameDir, "resources");
     private static final File PACK_META = new File(RESOURCE_DIR, "pack.mcmeta");
 
+    @SuppressWarnings("ReadWriteStringCanBeUsed")
     public static boolean ensurePackMcmetaExists() {
         if (!RESOURCE_DIR.exists()) {
             if (!RESOURCE_DIR.mkdir()) {
@@ -44,12 +43,12 @@ public class ExternalResourcePack {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     public static void injectExternalResources() {
-        // For now, this is how to avoid double loading
-        // Until External and Flattened are turned into a library, this is required
-        // to avoid CITNBT doubling up.
-        if (Loader.isModLoaded("citnbt"))
+        if (ModChecker.RESOURCE_LOADER || Loader.isModLoaded("citnbt")) {
+            MysticalAgriculture.LOGGER.info("ResourceLoader detected");
             return;
+        }
         File resourceDir = new File(Minecraft.getMinecraft().gameDir, "resources");
         IResourcePack flatPack = new FlattenedResourcePack(resourceDir);
 
@@ -60,17 +59,7 @@ public class ExternalResourcePack {
             defaultPacks.remove(flatPack);
 
             defaultPacks.add(flatPack);
-            List<IResourcePack> allPacks = new ArrayList<>(defaultPacks);
-            IResourcePack mcPack = mc.defaultResourcePack;
-            if (!allPacks.contains(mcPack)) {
-                allPacks.add(mcPack);
-            }
-            MysticalAgriculture.LOGGER.info("Loaded FlatResourcePack: ./resources");
-
-            IResourceManager rm = mc.getResourceManager();
-            if (rm instanceof SimpleReloadableResourceManager sm) {
-                sm.reloadResources(allPacks);
-            }
+            mc.refreshResources();
         } catch (Exception e) {
             MysticalAgriculture.LOGGER.error("Unable to load resources: {}", e.getLocalizedMessage());
         }

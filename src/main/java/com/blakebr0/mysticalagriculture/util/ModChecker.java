@@ -5,6 +5,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class ModChecker {
 
+    public static final boolean RESOURCE_LOADER = Loader.isModLoaded("resourceloader");
+
     public static final boolean JEI = Loader.isModLoaded("JEI") || Loader.isModLoaded("jei");
     public static final boolean TINKERS_CONSTRUCT = Loader.isModLoaded("tconstruct");
     public static final boolean ENDERIO = Loader.isModLoaded("EnderIO") || Loader.isModLoaded("enderio");
